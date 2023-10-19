@@ -1,6 +1,6 @@
-Nombre,Apellido paterno,Apellido materno,Correo Institucional,Correo Personal,Fecha de ingreso ,Fecha de egreso,Empresa,Puesto
-ALEJANDRO,AGUILAR,VEA,alejandro.aguilar.vea@uabc.edu.mx,,2015-1,2022-2,,
-RICARDO,BANUELOS,DE LA TORRE,ricardo.banuelos@uabc.edu.mx,,2017-2,2022-1,,
+Nombre,Apellido paterno,Apellido materno,Correo Institucional,Correo,Fecha de ingreso,Fecha de egreso,Empresa,Puesto
+ALEJANDRO,AGUILAR,VEA,alejandro.aguilar.vea@uabc.edu.mx,alejandro.aguilar.vea@uabc.edu.mx,2015-1,2022-2,,
+RICARDO,BANUELOS,DE LA TORRE,ricardo.banuelos@uabc.edu.mx,ricardo.banuelos@uabc.edu.mx,2017-2,2022-1,,
 ARELI,CAPISTRAN,MARTINEZ,capistran.areli@uabc.edu.mx,,2018-2,2022-2,,
 DANIEL ADLAI,CARMONA,MOLINA,adlai.carmona@uabc.edu.mx,,2018-2,2022-2,,
 LUIS ALBERTO,CRISANTOS,USCANGA,luis.crisantos@uabc.edu.mx,,2017-2,2022-2,,
