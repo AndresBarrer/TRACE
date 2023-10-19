@@ -227,7 +227,7 @@ a:focus {
   }
 
   #wrapper.toggled #navbar-wrapper {
-    position: absolute;
+    position: sticky;
     margin-right: -250px;
   }
 
@@ -237,7 +237,7 @@ a:focus {
   }
 
   #navbar-wrapper {
-    position: relative;
+    position: sticky;
   }
 
   #wrapper.toggled {
@@ -260,12 +260,4 @@ iframe {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
-}
-
-#tabla {
-  position: relative;
-  margin-top: 10px;
-  width: 100%;
-  height: 100%;
-  border: none;
 }
