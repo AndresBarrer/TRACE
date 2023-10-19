@@ -7,6 +7,9 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link rel='stylesheet' href='Resources/styles.css'>
+    <link rel='stylesheet' href='Resources/styles.scss'>
+    <link rel='stylesheet' href='Resources/tablas-styles.css'>
+
 </head>
 
 <body>
@@ -53,16 +56,36 @@
         <section id="content-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="content-title">Mapa de calor de los egresados</h2>
+                    <h2 class="content-title">tablas</h2>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro earum animi nobis, aliquam qui
                         cumque atque quibusdam tenetur consequuntur id quia, obcaecati, accusantium error molestiae
                         totam quos dolorem? Eaque, officiis.</p>
                 </div>
             </div>
-            <iframe src="Scraper/heatmap.html" width="800" height="400" frameborder="0"></iframe>
+            <div class="table-users">
+                <div class="header">Users</div>
+        
+                <table cellspacing="0" id="user-table">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido paterno</th>
+                        <th>Apellido materno</th>
+                        <th>Correo institucional</th>
+                        <th>Correo personal</th>
+                        <th>Fecha de ingreso</th>
+                        <th>Fecha de egreso</th>
+                        <th>Empresa</th>
+                        <th>Puesto</th>
+                    </tr>
+                </table>
+            </div>
         </section>
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
+    integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="Resources/tablas-scripts.js"></script>
     <script src="Resources/scripts.js"></script>
 </body>
 
