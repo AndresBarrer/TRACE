@@ -1,3 +1,7 @@
+# Used to look up students through search box
+from selenium import webdriver
+
+# Used to web scrape
 from linkedin_api import Linkedin
 
 # Uses to login to linkedin
@@ -7,6 +11,40 @@ from linkedinAccount import account
 # Set a random delay in between scrapes
 import random
 import time
+
+# Create Chrome web driver
+driver = webdriver.Chrome()
+
+# Navigate to specified URL
+driver.get("https://www.linkedin.com/school/universidad-aut%C3%B3noma-de-baja-california/people/")
+
+# Give time for the webpage to load, and to not be suspicious lol
+time.sleep(3);
+
+# Find the search text box
+search_box = driver.find_element_by_id("people-search-keywords")
+
+# Pass name of student into text box
+search_box.send_keys("Name goes here")
+
+# Hit Enter to search
+search_box.submit();
+
+time.sleep(3)
+try:
+    # Try to locate and click the first search result
+    result = driver.find_element_by_id("ember829")
+    result.click()
+
+    time.sleep(3)
+    # Get the URL of the student
+    current_url = driver.current_url
+    print(current_url)
+except NoSuchElementException:
+    pass
+
+
+
 
 # Used to login to linkedin
 api = Linkedin(account, password)
