@@ -136,8 +136,13 @@ def generate_heatmap(locations_lat_lon, output_file):
     """
 
     # Create a Folium map
-    map = folium.Map(location=[38.27312, -98.5821872], zoom_start=5)
+    map = folium.Map(location=[38.27312, -98.5821872], zoom_start=4)
 
+    # Define the maximum bounds for the map (worldwide bounds)
+    max_bounds = [[-90, -180], [90, 180]]
+    map.add_child(folium.LatLngPopup())
+    map.fit_bounds(max_bounds)
+    
     # Add a heatmap to the map
     HeatMap(locations_lat_lon).add_to(map)
 
