@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2023 a las 20:24:03
+-- Tiempo de generación: 03-11-2023 a las 06:17:59
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -291,6 +291,25 @@ INSERT INTO `cuentas` (`Id_Cuenta`, `Usuario`, `Contrasena`, `Primer_acceso`) VA
 (111, 'yaneli.mendias@uabc.edu.mx', '1234550', 0),
 (112, 'yereline.sanchez@uabc.edu.mx', '1226795', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentas_admin`
+--
+
+CREATE TABLE `cuentas_admin` (
+  `Id_Cuenta` int(11) NOT NULL,
+  `Usuario` varchar(255) NOT NULL,
+  `Contrasena` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cuentas_admin`
+--
+
+INSERT INTO `cuentas_admin` (`Id_Cuenta`, `Usuario`, `Contrasena`) VALUES
+(1, 'Admin', 'admin123');
+
 --
 -- Índices para tablas volcadas
 --
@@ -310,6 +329,12 @@ ALTER TABLE `cuentas`
   ADD KEY `Usuario` (`Usuario`);
 
 --
+-- Indices de la tabla `cuentas_admin`
+--
+ALTER TABLE `cuentas_admin`
+  ADD PRIMARY KEY (`Id_Cuenta`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -317,7 +342,13 @@ ALTER TABLE `cuentas`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_admin`
+--
+ALTER TABLE `cuentas_admin`
+  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
