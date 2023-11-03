@@ -29,7 +29,7 @@
                 <li>
                     <a href="tablas.html"><i class="fa fa-linkedin"></i>Tablas</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="howitworks.html"><i class="fa fa-book"></i>Como funciona</a>
                 </li>
                 <li>
@@ -41,7 +41,7 @@
                 <li>
                     <a href="login.html"><i class="fa fa-upload"></i>Actualiza tus datos</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="admin.html"><i class="fa fa-upload"></i>Admin</a>
                 </li>
             </ul>
@@ -56,17 +56,18 @@
                 </div>
             </nav>
         </div>
+
         <section id="content-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="content-title">How it works?</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro earum animi nobis, aliquam qui
-                        cumque atque quibusdam tenetur consequuntur id quia, obcaecati, accusantium error molestiae
-                        totam quos dolorem? Eaque, officiis.</p>
-                </div>
+            <div id="upload-container">
+                <h2>Subir archivo CSV</h2>
+                <form id="upload-form" action="" method="post" enctype="multipart/form-data">
+                    <input type="file" name="csv-file" accept=".csv">
+                    <br>
+                    <input type="submit" value="Subir CSV" class="btn btn-primary">
+                </form>
             </div>
         </section>
-
+        
     </div>
     <script src="Resources/scripts.js"></script>
 </body>
