@@ -60,14 +60,15 @@
             <div class="container">
                 <div class="glassmorphism-form">
                   <h2>Actualiza tus datos</h2>
-                  <form id="login-form">
-                    <h1>Alumno #1</h1>
+                  <form id="update-form" action="Resources/update_process.php" method="post">
+                    <h1>Alumno: <?php echo isset($_GET['matricula']) ? $_GET['matricula'] : 'No disponible'; ?></h1>
                     <h3>Empresa</h3>
-                    <input type="text" placeholder="Empresa Random" required>
+                    <input type="hidden" name="matricula" value="<?php echo isset($_GET['matricula']) ? $_GET['matricula'] : ''; ?>">
+                    <input type="text" name="empresa" placeholder="Empresa" required>
                     <h3>Correo personal</h3>
-                    <input type="text" placeholder="N/A" required>
+                    <input type="text" name="correoPersonal" placeholder="Correo" required>
                     <h3>Puesto</h3>
-                    <input type="text" placeholder="N/A" required>
+                    <input type="text" name="puesto" placeholder="Puesto" required>
                     <button type="submit">Continuar</button>
                   </form>
                 </div>
