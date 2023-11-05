@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2023 a las 06:17:59
+-- Tiempo de generación: 05-11-2023 a las 06:22:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -49,25 +49,25 @@ CREATE TABLE `alumni` (
 INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`, `CorreoP`, `FechaIng`, `FechaEgreso`, `Compania`, `Puesto`, `GeoLocationName`, `GeoCountryName`) VALUES
 (290179, 'ALDO ANDRE', 'SILVA', 'LUNA', 'aldo.silva@uabc.edu.mx', '', '2011-1', '2019-1', '', '', '', ''),
 (346547, 'ABRAHAM', 'MEDINA', 'CARRILLO', 'abraham.medina.carrillo@uabc.edu.mx', '', '2016-2', '2022-1', '', '', '', ''),
-(1200271, 'JOSE ARMANDO', 'GUTI?RREZ', 'N??EZ', 'armando.gutierrez5@uabc.edu.mx', '', '2011-2', '2018-2', '', '', '', ''),
+(1200271, 'JOSE ARMANDO', 'GUTIÉRREZ', 'NÚÑEZ', 'armando.gutierrez5@uabc.edu.mx', '', '2011-2', '2018-2', '', '', '', ''),
 (1200315, 'ENEIDA GUILLERMINA', 'ESPINOZA', 'RAMIREZ', 'eneida.espinoza@uabc.edu.mx', '', '2012-1', '2018-2', '', '', '', ''),
 (1200429, 'GUSTAVO', 'LEYVA', 'HERNANDEZ', 'gustavo.leyva@uabc.edu.mx', '', '2012-1', '2019-2', '', '', '', ''),
 (1200553, 'ANGELICA JAZMIN', 'AVILA', 'HUIZAR', 'angelica.avila@uabc.edu.mx', '', '2011-2', '2019-1', '', '', '', ''),
 (1207876, 'DANIEL', 'HERRERA', 'GONZALEZ', 'daniel.herrera.gonzalez@uabc.edu.mx', '', '2012-1', '2018-2', '', '', '', ''),
-(1208369, 'VICTOR ENRIQUE', 'L?PEZ', 'MALDONADO', 'vlopez44@uabc.edu.mx', '', '2012-2', '2018-2', '', '', '', ''),
+(1208369, 'VICTOR ENRIQUE', 'LÓPEZ', 'MALDONADO', 'vlopez44@uabc.edu.mx', '', '2012-2', '2018-2', '', '', '', ''),
 (1208408, 'GABRIEL', 'VALDEZ', 'TOPETE', 'valdez.gabriel@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1208411, 'SERGIO ANTONIO', 'JIMENEZ', 'HERNANDEZ', 'sergio.jimenez@uabc.edu.mx', '', '2012-2', '2018-2', '', '', '', ''),
 (1208458, 'JESUS ADEL', 'LEON', 'ORTIZ', 'adel.leon@uabc.edu.mx', '', '2012-2', '2019-1', '', '', '', ''),
 (1208520, 'SHUNG LI', 'CHON', 'AGUIAR', 'li.chon@uabc.edu.mx', '', '2013-1', '2019-2', '', '', '', ''),
-(1208529, 'JOSE CARLOS', 'BOLA?OS', 'MARQUEZ', 'jose.bolanos@uabc.edu.mx', '', '2012-2', '2018-2', '', '', '', ''),
+(1208529, 'JOSE CARLOS', 'BOLAÑOS', 'MARQUEZ', 'jose.bolanos@uabc.edu.mx', '', '2012-2', '2018-2', '', '', '', ''),
 (1208610, 'RUBEN OSBALDO', 'REYES', 'RIVERA', 'osbaldo.reyes@uabc.edu.mx', '', '2012-2', '2019-1', '', '', '', ''),
 (1208658, 'MANUEL ANTONIO', 'ALANIS', 'CARRILLO', 'alanism@uabc.edu.mx', '', '2013-1', '2019-1', '', '', '', ''),
-(1208750, 'EMMANUEL', 'NU?O', 'ESTRELLA', 'emmanuel.nuno.estrella@uabc.edu.mx', '', '2012-2', '2020-1', '', '', '', ''),
+(1208750, 'EMMANUEL', 'NUÑO', 'ESTRELLA', 'emmanuel.nuno.estrella@uabc.edu.mx', '', '2012-2', '2020-1', '', '', '', ''),
 (1208767, 'MIGUEL ALEXANDRO', 'ROBLEDO', 'GONZALEZ', 'miguel.robledo@uabc.edu.mx', '', '2012-2', '2020-1', '', '', '', ''),
 (1208846, 'JESUS ALBERTO', 'TRINIDAD', 'GARCIA', 'jesus.trinidad@uabc.edu.mx', '', '2012-2', '2019-1', '', '', '', ''),
 (1208908, 'VICTOR AARON', 'SANCHEZ', 'QUIROZ', 'victor.aaron.sanchez.quiroz@uabc.edu.mx', '', '2013-1', '2019-2', '', '', '', ''),
-(1214623, 'MAGDALENA CONCEPCI?N', 'BRAVO', 'GONZALEZ', 'magdalena.bravo@uabc.edu.mx', '', '2014-2', '2019-1', '', '', '', ''),
-(1216621, 'PAUL', 'JIM?NEZ', 'FRANCO', 'jimenez.paul@uabc.edu.mx', '', '2013-2', '2019-2', '', '', '', ''),
+(1214623, 'MAGDALENA CONCEPCIÓN', 'BRAVO', 'GONZALEZ', 'magdalena.bravo@uabc.edu.mx', '', '2014-2', '2019-1', '', '', '', ''),
+(1216621, 'PAUL', 'JIMÉNEZ', 'FRANCO', 'jimenez.paul@uabc.edu.mx', '', '2013-2', '2019-2', '', '', '', ''),
 (1216638, 'JOSE EMMANUEL', 'MORAN', 'CARRILLO', 'emmanuel.moran@uabc.edu.mx', '', '2013-2', '2019-1', '', '', '', ''),
 (1216693, 'FRANCISCO MARTIN', 'AREVALOS', 'FERNANDEZ', 'martin.arevalos@uabc.edu.mx', '', '2013-2', '2019-2', '', '', '', ''),
 (1216718, 'CRISTINA', 'QUINTERO', 'MARIN', 'quintero.cristina@uabc.edu.mx', '', '2014-1', '2021-2', '', '', '', ''),
@@ -84,22 +84,22 @@ INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`
 (1217258, 'LUIS ENRIQUE', 'GONZALEZ', 'CARDIEL', 'luis.gonzalez15@uabc.edu.mx', '', '2013-2', '2019-1', '', '', '', ''),
 (1217266, 'CARLOS JAVIER', 'DE LA CRUZ', 'LOPEZ', 'delacruz.carlos@uabc.edu.mx', '', '2013-2', '2019-1', '', '', '', ''),
 (1217280, 'CARLOS ALEJANDRO', 'GONZALEZ', 'ORTIZ', 'carlos.alejandro.gonzalez.ortiz@uabc.edu.mx', '', '2014-1', '2020-1', '', '', '', ''),
-(1217306, 'YAIR EDUARDO', 'CASTREJ?N', 'MART?NEZ', 'yair.castrejon@uabc.edu.mx', '', '2013-2', '2019-2', '', '', '', ''),
+(1217306, 'YAIR EDUARDO', 'CASTREJÓN', 'MARTÍNEZ', 'yair.castrejon@uabc.edu.mx', '', '2013-2', '2019-2', '', '', '', ''),
 (1220016, 'ALEJANDRO', 'AGUILAR', 'VEA', 'alejandro.aguilar.vea@uabc.edu.mx', '', '2015-1', '2022-2', '', '', '', ''),
 (1220619, 'MARIA ALEJANDRA', 'BRUGHERA', 'PEREZ', 'alejandra.brughera@uabc.edu.mx', '', '2014-2', '2020-1', '', '', '', ''),
 (1220995, 'VICTOR', 'BARCENAS', 'BURGOS', 'victor.barcenas@uabc.edu.mx', '', '2013-2', '2019-2', '', '', '', ''),
 (1221858, 'LUIS MAURICIO', 'PALACIO', 'RENTERIA', 'palacio.luis@uabc.edu.mx', '', '2013-2', '2021-1', '', '', '', ''),
 (1222324, 'LEONARDO', 'MELENDEZ', 'LINEROS', 'leonardo.melendez@uabc.edu.mx', '', '2017-2', '2022-2', '', '', '', ''),
 (1224684, 'RAMSSES', 'PALAFOX', 'BALLARDO', 'rpalafox@uabc.edu.mx', '', '2014-2', '2020-2', '', '', '', ''),
-(1225272, 'AAR?N ISAAC', 'TORRES', 'AVALOS', 'aaron.torres@uabc.edu.mx', '', '2014-1', '2020-1', '', '', '', ''),
+(1225272, 'AARÓN ISAAC', 'TORRES', 'AVALOS', 'aaron.torres@uabc.edu.mx', '', '2014-1', '2020-1', '', '', '', ''),
 (1225936, 'ARTURO', 'ARREOLA', 'ALVAREZ', 'arreola.arturo@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1226489, 'GUILLERMO', 'LEON', 'BARRIOS', 'guillermo.leon.barrios@uabc.edu.mx', '', '2014-2', '2021-1', '', '', '', ''),
 (1226679, 'ERICK GERARDO', 'GONZALEZ', 'CARDIEL', 'erick.gerardo.gonzalez.cardiel@uabc.edu.mx', '', '2014-2', '2018-2', '', '', '', ''),
 (1226702, 'JOSE ISABEL', 'GARCIA', 'ROCHA', 'a1226702@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1226795, 'BIANCA YERELINE', 'SANCHEZ', 'SOTO', 'yereline.sanchez@uabc.edu.mx', '', '2014-2', '2020-2', '', '', '', ''),
-(1227444, 'EDGAR', 'TAPIA', 'JIM?NEZ', 'tapia.edgar5@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
+(1227444, 'EDGAR', 'TAPIA', 'JIMÉNEZ', 'tapia.edgar5@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1227914, 'ROCHELLE NICOLLE', 'REYES', 'UDASCO', 'rochelle.reyes@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
-(1227952, 'BRALLAN AXEL', 'DOM?NGUEZ', 'L?PEZ', 'brallan.dominguez@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
+(1227952, 'BRALLAN AXEL', 'DOMÍNGUEZ', 'LÓPEZ', 'brallan.dominguez@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1228153, 'ROBERTO', 'SEVILLA', 'VARELA', 'roberto.sevilla.varela@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1228338, 'MARIA DEL ROSARIO', 'SANCHEZ', 'GARCIA', 'sanchezm78@uabc.edu.mx', '', '2014-2', '2019-1', '', '', '', ''),
 (1229127, 'MARIESLI', 'LAVENANT', 'SANCHEZ', 'mariesli.lavenant@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
@@ -111,9 +111,9 @@ INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`
 (1230589, 'MONSERRAT', 'CORTES', 'HERRERA', 'mcortes26@uabc.edu.mx', '', '2015-1', '2020-1', '', '', '', ''),
 (1230591, 'CARLOS MANUEL', 'PARRA', 'ALMANZA', 'a1230591@uabc.edu.mx', '', '2015-1', '2021-1', '', '', '', ''),
 (1231098, 'IVAN ALFREDO', 'MORALES', 'ROSALES', 'imorales13@uabc.edu.mx', '', '2015-1', '2021-2', '', '', '', ''),
-(1231366, 'GLORIA LORENA', 'CAMACHO', 'L?PEZ', 'lcamacho32@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
+(1231366, 'GLORIA LORENA', 'CAMACHO', 'LÓPEZ', 'lcamacho32@uabc.edu.mx', '', '2014-2', '2019-2', '', '', '', ''),
 (1232092, 'OSCAR AUGUSTO', 'MARTINEZ', 'SALINAS', 'oscar.martinez42@uabc.edu.mx', '', '2014-2', '2021-1', '', '', '', ''),
-(1232312, 'MIRIAM DENISSE', 'NEVAREZ', 'MART?NEZ', 'denisse.nevarez@uabc.edu.mx', '', '2014-2', '2018-2', '', '', '', ''),
+(1232312, 'MIRIAM DENISSE', 'NEVAREZ', 'MARTÍNEZ', 'denisse.nevarez@uabc.edu.mx', '', '2014-2', '2018-2', '', '', '', ''),
 (1234226, 'EFRAIN', 'SEGOVIANO', 'SOLEDAD', 'efrain.segoviano@uabc.edu.mx', '', '2015-1', '2019-2', '', '', '', ''),
 (1234550, 'SOFIA YANELI', 'MENDIAS', 'SANCHEZ', 'yaneli.mendias@uabc.edu.mx', '', '2015-2', '2020-1', '', '', '', ''),
 (1234627, 'HAOLIN', 'HONG', '', 'a1234627@uabc.edu.mx', '', '2016-1', '2022-1', '', '', '', ''),
@@ -123,13 +123,13 @@ INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`
 (1236301, 'JUNGEUM', 'KIM', '', 'kim.jungeum@uabc.edu.mx', '', '2015-2', '2020-2', '', '', '', ''),
 (1238137, 'JORGE ANTONIO', 'MARTINEZ', 'VILLANUEVA', 'amartinez31@uabc.edu.mx', '', '2015-2', '2021-1', '', '', '', ''),
 (1238268, 'JESUS ALBERTO', 'JAQUEZ', 'GALVAN', 'alberto.jaquez@uabc.edu.mx', '', '2015-2', '2020-2', '', '', '', ''),
-(1239210, 'OSCAR ANDRE', 'PATI?O', 'GONZALEZ', 'andre.patino@uabc.edu.mx', '', '2015-2', '2020-2', '', '', '', ''),
+(1239210, 'OSCAR ANDRE', 'PATIÑO', 'GONZALEZ', 'andre.patino@uabc.edu.mx', '', '2015-2', '2020-2', '', '', '', ''),
 (1239405, 'ALAN OMAR', 'ROBLEDO', 'LOPEZ', 'alan.omar.robledo.lopez@uabc.edu.mx', '', '2015-2', '2022-1', '', '', '', ''),
 (1241805, 'JOSUE ISRAEL', 'VARELA', 'ARENAS', 'josue.varela@uabc.edu.mx', '', '2016-1', '2022-1', '', '', '', ''),
 (1242003, 'SALVADOR', 'GONZALEZ', 'BELTRAN', 'salvador.gonzalez.beltran@uabc.edu.mx', '', '2015-2', '2021-1', '', '', '', ''),
 (1242780, 'DANIEL OMAR', 'NAJERA', 'DAVILA', 'daniel.najera@uabc.edu.mx', '', '2015-2', '2020-2', '', '', '', ''),
 (1244220, 'RACHELLE NERIE', 'REYES', 'UDASCO', 'reyes.rachelle@uabc.edu.mx', '', '2016-2', '2020-2', '', '', '', ''),
-(1244393, 'RICARDO', 'CASTA?ON', 'RENTERIA', 'ricardo.castanon@uabc.edu.mx', '', '2016-2', '2021-1', '', '', '', ''),
+(1244393, 'RICARDO', 'CASTAÑON', 'RENTERIA', 'ricardo.castanon@uabc.edu.mx', '', '2016-2', '2021-1', '', '', '', ''),
 (1244394, 'BRANDON', 'RAYGOZA', 'DE LA PAZ', 'raygoza.brandon@uabc.edu.mx', '', '2017-1', '2022-1', '', '', '', ''),
 (1244809, 'ISAAC', 'HERNANDEZ', 'CANP', 'isaac.hernandez.cano@uabc.edu.mx', '', '2016-2', '2021-2', '', '', '', ''),
 (1245064, 'PAMELA ITZELT', 'PEREZ', 'MANRIQUEZ', 'a1245064@uabc.edu.mx', '', '2016-2', '2021-1', '', '', '', ''),
@@ -137,7 +137,7 @@ INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`
 (1246720, 'IGNACIO', 'CHAVEZ', 'PADILLA', 'chavez.ignacio@uabc.edu.mx', '', '2016-2', '2020-2', '', '', '', ''),
 (1246836, 'SERGIO DANIEL', 'GONZALEZ', 'ORTEGA', 'a1246836@uabc.edu.mx', '', '2016-2', '2021-2', '', '', '', ''),
 (1247508, 'GERMAN', 'ADAME', 'COLIN', 'german.adame@uabc.edu.mx', '', '2016-2', '2021-1', '', '', '', ''),
-(1247818, 'MONICA MICHEL', 'GONZAGA', 'PATI?O', 'michel.gonzaga@uabc.edu.mx', '', '2016-2', '2022-1', '', '', '', ''),
+(1247818, 'MONICA MICHEL', 'GONZAGA', 'PATIÑO', 'michel.gonzaga@uabc.edu.mx', '', '2016-2', '2022-1', '', '', '', ''),
 (1248593, 'GUILLERMO EUGENIO', 'GUTIERREZ', 'SOTO', 'eugenio.gutierrez@uabc.edu.mx', '', '2016-2', '2022-1', '', '', '', ''),
 (1249052, 'JOSE RODRIGO', 'LEAL', 'VAZQUEZ', 'rodrigo.leal@uabc.edu.mx', '', '2016-2', '2022-1', '', '', '', ''),
 (1249134, 'DAVID', 'MONCIVAIS', 'MACIEL', 'david.moncivais@uabc.edu.mx', '', '2016-2', '2021-2', '', '', '', ''),
@@ -159,6 +159,24 @@ INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`
 (1261795, 'ROBERTO', 'CRUZ', 'BETANCOURT', 'roberto.cruz.betancourt@uabc.edu.mx', '', '2018-2', '2022-2', '', '', '', ''),
 (1262006, 'PAUL', 'GARCIA', 'GALEANA', 'paul.garcia.galeana@uabc.edu.mx', '', '2018-2', '2022-2', '', '', '', ''),
 (1262509, 'ARELI', 'CAPISTRAN', 'MARTINEZ', 'capistran.areli@uabc.edu.mx', '', '2018-2', '2022-2', '', '', '', '');
+
+--
+-- Disparadores `alumni`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_alumni_create_account` AFTER INSERT ON `alumni` FOR EACH ROW BEGIN
+    INSERT INTO cuentas (Usuario, Contrasena, Primer_acceso)
+    VALUES (NEW.correoI, NEW.matricula, 0);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_alumni_delete_account` BEFORE DELETE ON `alumni` FOR EACH ROW BEGIN
+    DELETE FROM cuentas
+    WHERE Usuario = OLD.correoI;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -342,7 +360,7 @@ ALTER TABLE `cuentas_admin`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT de la tabla `cuentas_admin`
