@@ -1,23 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // URL del archivo CSV
-    var csvURL = "Resources/tablas-egresados.csv"; // Reemplaza "tu_archivo.csv" con la URL de tu archivo CSV
-
-    // Obtén las partes de la tabla
     var tableBody = document.getElementById("table-body");
-    var tableHead = document.querySelector("table thead");
-
-    // Variables de paginación
-    var page = 1; // Página actual
-    var rowsPerPage = 10; // Filas por página
-
-    // Obtén los botones de navegación
+    var page = 1;
+    var rowsPerPage = 10;
     var prevButton = document.getElementById("previous-page");
     var nextButton = document.getElementById("next-page");
+    var data; // Declarar la variable data aquí
 
-    // Función para mostrar las filas en la página actual
     function showRowsInPage(data) {
-        tableBody.innerHTML = ""; // Limpia el cuerpo de la tabla
-
+        tableBody.innerHTML = "";
         var startIndex = (page - 1) * rowsPerPage;
         var endIndex = startIndex + rowsPerPage;
 
@@ -26,22 +16,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 var row = data[i];
                 var newRow = document.createElement("tr");
                 newRow.innerHTML = `
-                <td>${row.Nombre || 'N/A'}</td>
-                <td>${row["Apellido paterno"] || 'N/A'}</td>
-                <td>${row["Apellido materno"] || 'N/A'}</td>
-                <td>${row["Correo Institucional"] || 'N/A'}</td>
-                <td>${row["Correo"] || 'N/A'}</td>
-                <td>${row["Fecha de ingreso"] || 'N/A'}</td>
-                <td>${row["Fecha de egreso"] || 'N/A'}</td>
-                <td>${row.Empresa || 'N/A'}</td>
-                <td>${row.Puesto || 'N/A'}</td>
+                    <td>${row.Nombre || 'N/A'}</td>
+                    <td>${row.ApellidoP || 'N/A'}</td>
+                    <td>${row.ApellidoM || 'N/A'}</td>
+                    <td>${row.CorreoI || 'N/A'}</td>
+                    <td>${row.CorreoP || 'N/A'}</td>
+                    <td>${row.FechaIng || 'N/A'}</td>
+                    <td>${row.FechaEgreso || 'N/A'}</td>
+                    <td>${row.Empresa || 'N/A'}</td>
+                    <td>${row.Puesto || 'N/A'}</td>
                 `;
                 tableBody.appendChild(newRow);
             }
         }
     }
 
-    // Función para manejar el evento de página anterior
     prevButton.addEventListener("click", function() {
         if (page > 1) {
             page--;
@@ -49,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Función para manejar el evento de página siguiente
     nextButton.addEventListener("click", function() {
         if (page < Math.ceil(data.length / rowsPerPage)) {
             page++;
@@ -57,18 +45,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Realiza la solicitud para cargar y analizar el archivo CSV
-    Papa.parse(csvURL, {
-        header: true, // Suponemos que la primera fila es un encabezado
-        download: true,
-        dynamicTyping: true,
-        skipEmptyLines: true,
-        error: function(error){
-            console.error("Error al cargar el archivo CSV: ", error);
-        },
-        complete: function(results) {
-            data = results.data;
+    // Realiza una solicitud AJAX para obtener los datos de la base de datos
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "Resources/tablas.php", true); 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            data = JSON.parse(xhr.responseText);
             showRowsInPage(data);
         }
-    });
+    };
+    xhr.send();
 });
