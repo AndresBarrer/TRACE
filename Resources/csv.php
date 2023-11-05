@@ -60,3 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<div style="text-align: center; margin-top: 20px;">
+    <button onclick="window.location.href = '../index.html';">Volver al inicio</button>
+</div>

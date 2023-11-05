@@ -60,10 +60,10 @@
             <div class="container">
                 <div class="glassmorphism-form">
                   <h2>Inicia Sesion</h2>
-                  <form id="login-form">
-                    <input type="text" placeholder="Correo" required>
-                    <input type="password" placeholder="Contraseña" required>
-                    <button type="submit" href="update.html">Continuar</button>
+                  <form id="login-form" action="Resources/admin.php" method="post">
+                    <input type="text" name="usuario" placeholder="Usuario" required>
+                    <input type="password" name="contrasena" placeholder="Contraseña" required>
+                    <button type="submit">Continuar</button>
                   </form>
                   <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
                 </div>
