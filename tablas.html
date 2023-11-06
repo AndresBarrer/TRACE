@@ -67,22 +67,25 @@
                         totam quos dolorem? Eaque, officiis.</p>
                 </div>
             </div>
-            <input type="text" id="search-input" placeholder="Buscar...">
+            <div>
+                <input type="text" id="search-input" placeholder="Buscar">
+                <button id="search-button">Buscar</button>
+            </div>
             <div class="table-users">
                 <div class="header">Users</div>
-
+                
                 <table cellspacing="0" id="user-table">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellido paterno</th>
-                            <th>Apellido materno</th>
-                            <th>Correo institucional</th>
-                            <th>Correo personal</th>
-                            <th>Fecha de ingreso</th>
-                            <th>Fecha de egreso</th>
-                            <th>Empresa</th>
-                            <th>Puesto</th>
+                            <th><a href="#" id="sort-nombre">Nombre</a></th>
+                            <th><a href="#" id="sort-apellido-paterno">Apellido paterno</a></th>
+                            <th><a href="#" id="sort-apellido-materno">Apellido materno</a></th>
+                            <th><a href="#" id="sort-correo-institucional">Correo institucional</a></th>
+                            <th><a href="#" id="sort-correo-personal">Correo personal</a></th>
+                            <th><a href="#" id="sort-fecha-ingreso">Fecha de ingreso</a></th>
+                            <th><a href="#" id="sort-fecha-egreso">Fecha de egreso</a></th>
+                            <th><a href="#" id="sort-empresa">Empresa</a></th>
+                            <th><a href="#" id="sort-puesto">Puesto</a></th>
                         </tr>
                     </thead>
                     <tbody id="table-body"></tbody>
@@ -96,9 +99,6 @@
         </section>
 
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
-        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="Resources/tablas-scripts.js"></script>
     <script src="Resources/scripts.js"></script>
 
