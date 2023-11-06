@@ -35,8 +35,27 @@ if ($result->num_rows == 1) {
         echo "No se pudo encontrar la matrícula del alumno.";
         exit;
     }
-    // Redirige al usuario a la página de actualización con la matrícula en la URL
-    header("Location: ../update.php?matricula=$matricula");
+
+    // Consulta la tabla cuenta para obtener el primer acceso
+    $sql_acceso = "SELECT Primer_acceso FROM cuentas WHERE Usuario='$correo'";
+    $result_acceso = $conn->query($sql_acceso);
+
+    if ($result_acceso->num_rows == 1) {
+        $row_acceso = $result_acceso->fetch_assoc();
+        $acceso = $row_acceso['Primer_acceso'];
+        if ($acceso == 0) {
+            // El Primer_acceso es igual a 0, redirige al usuario a cambiar_contra.php
+            header("Location: ../cambiar_contra.php?matricula=$matricula&correo=$correo");
+        } else {
+            // El Primer_acceso no es igual a 0, puedes redirigir a otra página o mostrar un mensaje de error.
+            // Por ejemplo:
+            echo "Tu primer acceso no es igual a 0, no puedes acceder a cambiar_contra.php.";
+            // Redirige al usuario a la página de actualización con la matrícula en la URL
+            header("Location: ../update.php?matricula=$matricula");
+        }
+    }
+
+    
 } else {
     // Las credenciales son incorrectas, muestra un mensaje de error
     echo "Credenciales incorrectas. Inténtalo de nuevo.";

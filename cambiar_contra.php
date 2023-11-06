@@ -38,10 +38,10 @@
                 <li>
                     <a href="faq.html"><i class="fa fa-question"></i>FAQ</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="login.html"><i class="fa fa-upload"></i>Actualiza tus datos</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="admin.html"><i class="fa fa-upload"></i>Admin</a>
                 </li>
             </ul>
@@ -59,10 +59,15 @@
         <section id="content-wrapper">
             <div class="container">
                 <div class="glassmorphism-form">
-                  <h2>Inicia Sesion</h2>
-                  <form id="login-form" action="Resources/admin.php" method="post">
-                    <input type="text" name="usuario" placeholder="Usuario" required>
-                    <input type="password" name="contrasena" placeholder="Contraseña" required>
+                  <h2>Cambiar Contraseña</h2>
+                  <form id="update-form" action="Resources/contra_process.php" method="post">
+                    <h1>Alumno: <?php echo isset($_GET['matricula']) ? $_GET['matricula'] : 'No disponible'; ?></h1>
+                    <h3>Nueva Constraseña</h3>
+                    <input type="hidden" name="matricula" value="<?php echo isset($_GET['matricula']) ? $_GET['matricula'] : ''; ?>">
+                    <input type="hidden" name="correo" value="<?php echo isset($_GET['correo']) ? $_GET['correo'] : ''; ?>">
+                    <input type="password" name="password" placeholder="Nueva Contraseña" required>
+                    <h3>Confirmar Contraseña</h3>
+                    <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
                     <button type="submit">Continuar</button>
                   </form>
                 </div>
