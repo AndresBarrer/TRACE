@@ -1,0 +1,81 @@
+section .grid{
+    position: relative;
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.10);
+    font-size: 0.5em;
+    font-family: 'Lora', serif;
+    transform: translateY(20%);
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.container .item {
+    margin: 10px auto;
+}
+
+.item h4{
+    margin: 0px;
+}
+h2,
+h3,
+h5 {
+    margin: 0px;
+}
+
+/* ---- UI Style ----- */
+.item {
+    background-color: #fff;
+    width: 250px;
+}
+
+.item .image {
+    overflow: hidden;
+}
+
+.item .image img {
+    width: 100%;
+}
+
+.item .text {
+    padding: 2em;
+    text-align: center;
+}
+
+.item .text figcaption {
+    position: relative;
+    z-index: 1;
+}
+
+.item .text a {
+    color: rgba(0, 0, 0, 0.70);
+}
+
+.item .text p {
+    color: rgba(0, 0, 0, 0.70);
+    line-height: 22px;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.item .text .fa {
+    font-size: 25px;
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+}
+
+/* ---- Responsive Code ---- */
+@media (max-width: 500px) {
+    .item {
+        width: 100%;
+    }
+}
+
+/* ---- UI Style Ent ----- */
