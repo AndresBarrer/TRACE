@@ -1,3 +1,15 @@
+<?php
+// Iniciar la sesión (asegúrate de hacerlo antes de cualquier salida)
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
+    // Si no está autenticado, redirigir a la página de autenticación
+    header("Location: admin.html");
+    exit(); // Asegúrate de salir después de la redirección
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +72,7 @@
         <section id="content-wrapper">
             <div id="upload-container">
                 <h2>Subir archivo CSV</h2>
-                <form id="upload-form" action="Resources/csv.php" method="post" enctype="multipart/form-data">
+                <form id="upload-form" action="Resources/csv_process.php" method="post" enctype="multipart/form-data">
                     <input type="file" name="csv-file" accept=".csv">
                     <br>
                     <input type="submit" value="Subir CSV" class="btn btn-primary">
