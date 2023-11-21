@@ -1,3 +1,14 @@
+<?php
+$matricula = isset($_GET['matricula']) ? $_GET['matricula'] : '';
+
+// Verificar si la matrícula está presente
+if (empty($matricula)) {
+    // Si la matrícula no está presente, redirigir a la página deseada (por ejemplo, login.html)
+    header("Location: login.html");
+    exit(); // Asegúrate de salir después de la redirección
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

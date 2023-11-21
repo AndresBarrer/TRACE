@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->close();
 } else {
     echo "No se han enviado datos.";
+    header("Location: ../login.html");
+    exit(); // Asegúrate de salir después de la redirección
 }
 ?>
 <div style="text-align: center; margin-top: 20px;">

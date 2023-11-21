@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Actualización exitosa.";
     } else {
         echo "Error al cargar el archivo.";
+        header("Location: ../admin.html");
+        exit(); // Asegúrate de salir después de la redirección
     }
 }
 ?>

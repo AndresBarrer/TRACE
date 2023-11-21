@@ -1,4 +1,7 @@
 <?php
+// Iniciar la sesión (asegúrate de hacerlo antes de cualquier salida)
+session_start();
+
 // Establece la conexión a la base de datos
 $host = "localhost";
 $username = "root";
@@ -19,12 +22,17 @@ $sql = "SELECT * FROM cuentas_admin WHERE Usuario='$usuario' AND Contrasena='$co
 $result = $conn->query($sql);
 
 if ($result->num_rows == 1) {
-    // Las credenciales son válidas, redirige al usuario a la página deseada (csv.html)
-    header("Location: ../csv.html");
+    // Las credenciales son válidas, establecer la variable de sesión
+    $_SESSION['autenticado'] = true;
+
+    // Redirigir al usuario a la página deseada (csv.html)
+    header("Location: ../csv.php");
+    exit(); // Asegúrate de salir después de la redirección
 } else {
     // Las credenciales son incorrectas, muestra un mensaje de error
     echo "Credenciales incorrectas. Inténtalo de nuevo.";
     header("Location: ../admin.html");
+    exit(); // Asegúrate de salir después de la redirección
 }
 
 $conn->close();

@@ -1,3 +1,15 @@
+<?php
+// Iniciar la sesión (asegúrate de hacerlo antes de cualquier salida)
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
+    // Si no está autenticado, redirigir a la página de autenticación
+    header("Location: admin.html");
+    exit(); // Asegúrate de salir después de la redirección
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,34 +69,18 @@
             </nav>
         </div>
 
-        <section id="content-wrapper"> 
-            <h2>Subir archivo CSV</h2>   
-            <h4>Para subir un archivo en formato csv es necesario que el mismo cumpla con un formato especifico el cual debe de seguir lo siguiente:</h4> 
-            <h4>algo,algo,algo,algo</h4>
-            <div id="upload-container" class="form-group inputDnD col-sm-6 offset-sm-3">
-                <form id="upload-form" action="Resources/csv.php" method="post" enctype="multipart/form-data">
-                    <input type="file" class="form-control-file text-success font-weight-bold" name="csv-file" accept=".csv"
-                        data-title="Arrastra un archivo aqui o da clic" id="inputFile">
+        <section id="content-wrapper">
+            <div id="upload-container">
+                <h2>Subir archivo CSV</h2>
+                <form id="upload-form" action="Resources/csv_process.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="csv-file" accept=".csv">
                     <br>
-                    <input type="submit" value="Subir CSV" class="form-control-button">
+                    <input type="submit" value="Subir CSV" class="btn btn-primary">
                 </form>
             </div>
         </section>
+        
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Selecciona el elemento inputFile
-            var inputFile = document.getElementById("inputFile");
-
-            // Agrega un evento change al inputFile
-            inputFile.addEventListener("change", function() {
-                // Actualiza el valor del atributo data-title con el nombre del archivo seleccionado
-                inputFile.setAttribute("data-title", "Archivo seleccionado: " + this.files[0].name);
-            });
-        });
-    </script>
-
     <script src="Resources/scripts.js"></script>
 </body>
 
