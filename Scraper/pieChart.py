@@ -1,29 +1,44 @@
 import matplotlib.pyplot as plt
 import sqlite3
 
+# Importing module 
+import mysql.connector
+
 def main():
     alumnos_total = 0
     alumnos_encontrados = 0
     alumnos_no_encontrados = 0
+
+    # Create a connection to the database
+    #connection = sqlite3.connect('trace.sql')
     
-    connection = sqlite3.connect('../trace.sql')
-    cursor = connection.cursor()
+    # Create a cursor to the database to make changes
+    #cursor = connection.cursor()
     
+    # Connect to the database 
+    db = mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "",
+        database = "trace"
+    )
+    
+    # Create a cursor to the database
+    cursor = db.cursor()
+
     # Consulta SQL para contar la cantidad total de alumnos
-    consulta_total = "SELECT COUNT(*) FROM alumni"
-    cursor.execute(consulta_total)
+    cursor.execute("SELECT COUNT(*) FROM alumni")
     resultado_total = cursor.fetchone()
     alumnos_total = resultado_total[0]
     
     # Consulta SQL para contar la cantidad de alumnos encontrados (sin contenido NULL en la localización)
-    consulta_encontrados = "SELECT COUNT(*) FROM alumni WHERE GeoLocationName <> ''"
-    cursor.execute(consulta_encontrados)
+    cursor.execute("SELECT COUNT(*) FROM alumni WHERE GeoLocationName <> ''")
     resultado_encontrados = cursor.fetchone()
     alumnos_encontrados = resultado_encontrados[0]
     
     alumnos_no_encontrados = alumnos_total - alumnos_encontrados
     
-    connection.close()
+    db.close()
     
     # Etiquetas para las porciones de la gráfica
     etiquetas = ['Encontrados', 'No Encontrados']
