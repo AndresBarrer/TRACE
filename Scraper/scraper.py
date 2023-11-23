@@ -1,6 +1,7 @@
 import csv
 import sqlite3
 import time
+import os
 from selenium import webdriver
 from linkedin_api import Linkedin
 from geopy.geocoders import Nominatim
@@ -229,6 +230,9 @@ def main():
 
     # Generate and save the heatmap with the processed locations
     generate_heatmap(locations_lat_lon, "heatmap.html")
+
+    # Llamar a pieChart.py para generar el gráfico circular
+    os.system("python pieChart.py")
 
     connection.close()
 
