@@ -21,6 +21,10 @@ To create a virtual environment:
 Activating virtual environment on Windows:  
 `.\virtual_environment_name\Scripts\activate`
 
+If after running, you get an error of UnauthorizedAccess, run this command, then try activating again:
+`Set-ExecutionPolicy Unrestricted -Scope Process`
+
+
 Activating virtual environment on Linux:  
 `source virtual_environment_name/bin/activate`
 

@@ -153,11 +153,16 @@ def generate_heatmap(locations_lat_lon, output_file):
 
 def main():
 
-    # Create a connection to the database
-    connection = sqlite3.connect('trace.sql')
+    # Connect to the database 
+    db = mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "",
+        database = "trace"
+    )
     
-    # Create a cursor to the database to make changes
-    cursor = connection.cursor()
+    # Create a cursor to the database
+    cursor = db.cursor()
 
     # Open the csv file with read permissions
     with open("tablas-egresados.csv", "r") as file:
@@ -180,7 +185,7 @@ def main():
             else:
                 print(f"Student with ID {matricula} already exists in the database.")
 
-    connection.commit()
+    db.commit()
 
     cursor.execute("SELECT Matricula, Nombre, ApellidoP FROM alumni")
     students = cursor.fetchall()
@@ -234,7 +239,7 @@ def main():
     # Llamar a pieChart.py para generar el gráfico circular
     os.system("python pieChart.py")
 
-    connection.close()
+    db.close()
 
 
 
