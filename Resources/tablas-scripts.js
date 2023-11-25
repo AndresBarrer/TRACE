@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${row.CorreoP || 'N/A'}</td>
                     <td>${row.FechaIng || 'N/A'}</td>
                     <td>${row.FechaEgreso || 'N/A'}</td>
-                    <td>${row.Empresa || 'N/A'}</td>
+                    <td>${row.Compania || 'N/A'}</td>
                     <td>${row.Puesto || 'N/A'}</td>
                 `;
                 tableBody.appendChild(newRow);

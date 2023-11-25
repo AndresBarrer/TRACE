@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Actualiza los valores en la tabla alumni
-    $sql = "UPDATE cuentas SET Contrasena='$contraseña', Primer_acceso='1' WHERE Usuario='$correo'";
+    $sql = "UPDATE cuentas SET Contrasena='$contraseña', Primer_acceso='1' WHERE Usuario='$correo' AND Tipo_Cuenta='0'";
 
     if ($conn->query($sql) === false) {
         echo "Error al actualizar los datos: " . $conn->error;

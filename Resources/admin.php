@@ -18,7 +18,7 @@ $usuario = $_POST['usuario'];
 $contrasena = $_POST['contrasena'];
 
 // Consulta la base de datos para verificar las credenciales
-$sql = "SELECT * FROM cuentas_admin WHERE Usuario='$usuario' AND Contrasena='$contrasena'";
+$sql = "SELECT * FROM cuentas WHERE Usuario='$usuario' AND Contrasena='$contrasena' AND Tipo_Cuenta='1'";
 $result = $conn->query($sql);
 
 if ($result->num_rows == 1) {
