@@ -12,6 +12,9 @@ if ($conn->connect_error) {
     die("Error de conexión a la base de datos: " . $conn->connect_error);
 }
 
+// Establece el conjunto de caracteres
+$conn->set_charset("utf8mb4");
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csvFile = $_FILES['csv-file']['tmp_name'];
 
@@ -26,26 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 continue;
             }
 
-            $matricula = $data[0]; 
-            $nombre = $data[1];
-            $apellidoP = $data[2];
-            $apellidoM = $data[3];
-            $correoI = $data[4];
-            $correoP = $data[5];
-            $fechaIng = $data[6];
-            $fechaEgreso = $data[7];
-            $compania = $data[8];
-            $puesto = $data[9];
-            $geoLocationName = $data[10];
-            $geoCountryName = $data[11];
-
-            // Realiza la inserción en la tabla "alumni"
+            // Utiliza sentencias preparadas para evitar inyecciones SQL
             $sql = "INSERT INTO alumni (Matricula, Nombre, ApellidoP, ApellidoM, CorreoI, CorreoP, FechaIng, FechaEgreso, Compania, Puesto, GeoLocationName, GeoCountryName) 
-            VALUES ('$matricula', '$nombre', '$apellidoP', '$apellidoM', '$correoI', '$correoP', '$fechaIng', '$fechaEgreso', '$compania', '$puesto', '$geoLocationName', '$geoCountryName')";
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            $stmt = $conn->prepare($sql);
+            
+            // Vincula los parámetros
+            $stmt->bind_param("isssssssssss", $data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7], $data[8], $data[9], $data[10], $data[11]);
 
-            if ($conn->query($sql) === false) {
-                echo "Error al actualizar la base de datos: " . $conn->error;
+            // Ejecuta la sentencia
+            if ($stmt->execute() === false) {
+                echo "Error al actualizar la base de datos: " . $stmt->error;
             }
+
+            // Cierra la sentencia
+            $stmt->close();
         }
 
         fclose($file);

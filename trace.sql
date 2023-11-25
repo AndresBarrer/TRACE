@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2023 a las 12:54:52
+-- Tiempo de generación: 25-11-2023 a las 11:34:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `alumni` (
   `Matricula` int(11) NOT NULL,
-  `Nombre` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `ApellidoP` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `ApellidoM` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Nombre` varchar(255) NOT NULL,
+  `ApellidoP` varchar(255) NOT NULL,
+  `ApellidoM` varchar(255) NOT NULL,
   `CorreoI` varchar(255) NOT NULL,
   `CorreoP` varchar(255) DEFAULT NULL,
   `FechaIng` varchar(10) DEFAULT NULL,
   `FechaEgreso` varchar(10) DEFAULT NULL,
-  `Compania` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Compania` varchar(255) DEFAULT NULL,
   `Puesto` varchar(255) DEFAULT NULL,
   `GeoLocationName` varchar(255) DEFAULT NULL,
   `GeoCountryName` varchar(255) DEFAULT NULL
@@ -165,8 +165,8 @@ INSERT INTO `alumni` (`Matricula`, `Nombre`, `ApellidoP`, `ApellidoM`, `CorreoI`
 --
 DELIMITER $$
 CREATE TRIGGER `trg_alumni_create_account` AFTER INSERT ON `alumni` FOR EACH ROW BEGIN
-    INSERT INTO cuentas (Usuario, Contrasena, Primer_acceso)
-    VALUES (NEW.correoI, NEW.matricula, 0);
+    INSERT INTO cuentas (Usuario, Contrasena, Tipo_Cuenta, Primer_acceso)
+    VALUES (NEW.correoI, NEW.matricula, 0, 0);
 END
 $$
 DELIMITER ;
@@ -188,145 +188,128 @@ CREATE TABLE `cuentas` (
   `Id_Cuenta` int(11) NOT NULL,
   `Usuario` varchar(255) NOT NULL,
   `Contrasena` varchar(255) NOT NULL,
-  `Primer_acceso` tinyint(1) NOT NULL
+  `Tipo_Cuenta` tinyint(1) NOT NULL,
+  `Primer_Acceso` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cuentas`
 --
 
-INSERT INTO `cuentas` (`Id_Cuenta`, `Usuario`, `Contrasena`, `Primer_acceso`) VALUES
-(1, 'a1226702@uabc.edu.mx', '1226702', 0),
-(2, 'a1230591@uabc.edu.mx', '1230591', 0),
-(3, 'a1234627@uabc.edu.mx', '1234627', 0),
-(4, 'a1245064@uabc.edu.mx', '1245064', 0),
-(5, 'a1246836@uabc.edu.mx', '1246836', 0),
-(6, 'a1252819@uabc.edu.mx', '1252819', 0),
-(7, 'a1252872@uabc.edu.mx', '1252872', 0),
-(8, 'a1253534@uabc.edu.mx', '1253534', 0),
-(9, 'aaron.torres@uabc.edu.mx', '1225272', 0),
-(10, 'abraham.medina.carrillo@uabc.edu.mx', '346547', 0),
-(11, 'adel.leon@uabc.edu.mx', '1208458', 0),
-(12, 'adlai.carmona@uabc.edu.mx', '1261580', 0),
-(13, 'alan.omar.robledo.lopez@uabc.edu.mx', '1239405', 0),
-(14, 'alanism@uabc.edu.mx', '1208658', 0),
-(15, 'alberto.betancourt@uabc.edu.mx', '1229948', 0),
-(16, 'alberto.chagala@uabc.edu.mx', '1235788', 0),
-(17, 'alberto.jaquez@uabc.edu.mx', '1238268', 0),
-(18, 'aldo.silva@uabc.edu.mx', '290179', 0),
-(19, 'alejandra.brughera@uabc.edu.mx', '1220619', 0),
-(20, 'alejandro.aguilar.vea@uabc.edu.mx', '1220016', 0),
-(21, 'amartinez31@uabc.edu.mx', '1238137', 0),
-(22, 'andre.patino@uabc.edu.mx', '1239210', 0),
-(23, 'angelica.avila@uabc.edu.mx', '1200553', 0),
-(24, 'armando.gutierrez5@uabc.edu.mx', '1200271', 0),
-(25, 'arreola.arturo@uabc.edu.mx', '1225936', 0),
-(26, 'arturo.viruete@uabc.edu.mx', '1235877', 0),
-(27, 'berenice.flores@uabc.edu.mx', '1217242', 0),
-(28, 'brallan.dominguez@uabc.edu.mx', '1227952', 0),
-(29, 'bryan.silva@uabc.edu.mx', '1230477', 0),
-(30, 'capistran.areli@uabc.edu.mx', '1262509', 0),
-(31, 'carlos.alejandro.gonzalez.ortiz@uabc.edu.mx', '1217280', 0),
-(32, 'CCAZARES8@uabc.edu.mx', '1245120', 0),
-(33, 'chavez.ignacio@uabc.edu.mx', '1246720', 0),
-(34, 'claudia.araceli.cruz.terrazas@uabc.edu.mx', '1254176', 0),
-(35, 'cruz.miriam@uabc.edu.mx', '1253444', 0),
-(36, 'daniel.herrera.gonzalez@uabc.edu.mx', '1207876', 0),
-(37, 'daniel.najera@uabc.edu.mx', '1242780', 0),
-(38, 'dante.lopez@uabc.edu.mx', '1217111', 0),
-(39, 'david.moncivais@uabc.edu.mx', '1249134', 0),
-(40, 'delacruz.carlos@uabc.edu.mx', '1217266', 0),
-(41, 'denisse.nevarez@uabc.edu.mx', '1232312', 0),
-(42, 'diego.caudillo@uabc.edu.mx', '1249199', 0),
-(43, 'efrain.segoviano@uabc.edu.mx', '1234226', 0),
-(44, 'emmanuel.moran@uabc.edu.mx', '1216638', 0),
-(45, 'emmanuel.nuno.estrella@uabc.edu.mx', '1208750', 0),
-(46, 'eneida.espinoza@uabc.edu.mx', '1200315', 0),
-(47, 'erick.gerardo.gonzalez.cardiel@uabc.edu.mx', '1226679', 0),
-(48, 'eugenio.gutierrez@uabc.edu.mx', '1248593', 0),
-(49, 'feng.haosheng@uabc.edu.mx', '1253779', 0),
-(50, 'flores.saul@uabc.edu.mx', '1217102', 0),
-(51, 'german.adame@uabc.edu.mx', '1247508', 0),
-(52, 'gilberto.maldonado.miguel@uabc.edu.mx', '1249508', 0),
-(53, 'guillermo.leon.barrios@uabc.edu.mx', '1226489', 0),
-(54, 'gustavo.leyva@uabc.edu.mx', '1200429', 0),
-(55, 'gutierrez.alexis85@uabc.edu.mx', '1229558', 0),
-(56, 'imorales13@uabc.edu.mx', '1231098', 0),
-(57, 'isaac.hernandez.cano@uabc.edu.mx', '1244809', 0),
-(58, 'jessica.anguiano@uabc.edu.mx', '1252071', 0),
-(59, 'jesus.trinidad@uabc.edu.mx', '1208846', 0),
-(60, 'jimenez.paul@uabc.edu.mx', '1216621', 0),
-(61, 'jose.bolanos@uabc.edu.mx', '1208529', 0),
-(62, 'josue.varela@uabc.edu.mx', '1241805', 0),
-(63, 'kim.jungeum@uabc.edu.mx', '1236301', 0),
-(64, 'lcamacho32@uabc.edu.mx', '1231366', 0),
-(65, 'leonardo.david.aguilar.contreras@uabc.edu.mx', '1235197', 0),
-(66, 'leonardo.melendez@uabc.edu.mx', '1222324', 0),
-(67, 'lgutierrez7@uabc.edu.mx', '1230078', 0),
-(68, 'li.chon@uabc.edu.mx', '1208520', 0),
-(69, 'liam.tapia@uabc.edu.mx', '1249667', 0),
-(70, 'luis.crisantos@uabc.edu.mx', '1252771', 0),
-(71, 'luis.encinas@uabc.edu.mx', '1217249', 0),
-(72, 'luis.gonzalez15@uabc.edu.mx', '1217258', 0),
-(73, 'luis.picazarri@uabc.edu.mx', '1216845', 0),
-(74, 'magdalena.bravo@uabc.edu.mx', '1214623', 0),
-(75, 'mariesli.lavenant@uabc.edu.mx', '1229127', 0),
-(76, 'martin.arevalos@uabc.edu.mx', '1216693', 0),
-(77, 'mcortes26@uabc.edu.mx', '1230589', 0),
-(78, 'michel.gonzaga@uabc.edu.mx', '1247818', 0),
-(79, 'miguel.robledo@uabc.edu.mx', '1208767', 0),
-(80, 'montoya.omar@uabc.edu.mx', '1252892', 0),
-(81, 'mvillela@uabc.edu.mx', '1230053', 0),
-(82, 'nevarez.arturo@uabc.edu.mx', '1216790', 0),
-(83, 'osbaldo.reyes@uabc.edu.mx', '1208610', 0),
-(84, 'oscar.islas@uabc.edu.mx', '1217113', 0),
-(85, 'oscar.martinez42@uabc.edu.mx', '1232092', 0),
-(86, 'palacio.luis@uabc.edu.mx', '1221858', 0),
-(87, 'paul.garcia.galeana@uabc.edu.mx', '1262006', 0),
-(88, 'quintero.cristina@uabc.edu.mx', '1216718', 0),
-(89, 'raygoza.brandon@uabc.edu.mx', '1244394', 0),
-(90, 'reyes.rachelle@uabc.edu.mx', '1244220', 0),
-(91, 'ricardo.banuelos@uabc.edu.mx', '1252717', 0),
-(92, 'ricardo.castanon@uabc.edu.mx', '1244393', 0),
-(93, 'ricardo.castro27@uabc.edu.mx', '1217169', 0),
-(94, 'roberto.cruz.betancourt@uabc.edu.mx', '1261795', 0),
-(95, 'roberto.sevilla.varela@uabc.edu.mx', '1228153', 0),
-(96, 'rochelle.reyes@uabc.edu.mx', '1227914', 0),
-(97, 'rodrigo.leal@uabc.edu.mx', '1249052', 0),
-(98, 'rpalafox@uabc.edu.mx', '1224684', 0),
-(99, 'salvador.gonzalez.beltran@uabc.edu.mx', '1242003', 0),
-(100, 'salvador.zaragoza@uabc.edu.mx', '1217075', 0),
-(101, 'sanchezm78@uabc.edu.mx', '1228338', 0),
-(102, 'sergio.jimenez@uabc.edu.mx', '1208411', 0),
-(103, 'tapia.edgar5@uabc.edu.mx', '1227444', 0),
-(104, 'uriel.cebreros@uabc.edu.mx', '1217167', 0),
-(105, 'valdez.gabriel@uabc.edu.mx', '1208408', 0),
-(106, 'victor.aaron.sanchez.quiroz@uabc.edu.mx', '1208908', 0),
-(107, 'victor.barcenas@uabc.edu.mx', '1220995', 0),
-(108, 'victor.vera@uabc.edu.mx', '1252893', 0),
-(109, 'vlopez44@uabc.edu.mx', '1208369', 0),
-(110, 'yair.castrejon@uabc.edu.mx', '1217306', 0),
-(111, 'yaneli.mendias@uabc.edu.mx', '1234550', 0),
-(112, 'yereline.sanchez@uabc.edu.mx', '1226795', 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cuentas_admin`
---
-
-CREATE TABLE `cuentas_admin` (
-  `Id_Cuenta` int(11) NOT NULL,
-  `Usuario` varchar(255) NOT NULL,
-  `Contrasena` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `cuentas_admin`
---
-
-INSERT INTO `cuentas_admin` (`Id_Cuenta`, `Usuario`, `Contrasena`) VALUES
-(1, 'Admin', 'admin123');
+INSERT INTO `cuentas` (`Id_Cuenta`, `Usuario`, `Contrasena`, `Tipo_Cuenta`, `Primer_Acceso`) VALUES
+(1, 'Admin1', '1234', 1, 1),
+(2, 'alejandro.aguilar.vea@uabc.edu.mx', '1220016', 0, 0),
+(3, 'ricardo.banuelos@uabc.edu.mx', '1252717', 0, 0),
+(4, 'capistran.areli@uabc.edu.mx', '1262509', 0, 0),
+(5, 'adlai.carmona@uabc.edu.mx', '1261580', 0, 0),
+(6, 'luis.crisantos@uabc.edu.mx', '1252771', 0, 0),
+(7, 'roberto.cruz.betancourt@uabc.edu.mx', '1261795', 0, 0),
+(8, 'cruz.miriam@uabc.edu.mx', '1253444', 0, 0),
+(9, 'claudia.araceli.cruz.terrazas@uabc.edu.mx', '1254176', 0, 0),
+(10, 'a1253534@uabc.edu.mx', '1253534', 0, 0),
+(11, 'feng.haosheng@uabc.edu.mx', '1253779', 0, 0),
+(12, 'paul.garcia.galeana@uabc.edu.mx', '1262006', 0, 0),
+(13, 'michel.gonzaga@uabc.edu.mx', '1247818', 0, 0),
+(14, 'eugenio.gutierrez@uabc.edu.mx', '1248593', 0, 0),
+(15, 'a1234627@uabc.edu.mx', '1234627', 0, 0),
+(16, 'rodrigo.leal@uabc.edu.mx', '1249052', 0, 0),
+(17, 'gilberto.maldonado.miguel@uabc.edu.mx', '1249508', 0, 0),
+(18, 'abraham.medina.carrillo@uabc.edu.mx', '346547', 0, 0),
+(19, 'leonardo.melendez@uabc.edu.mx', '1222324', 0, 0),
+(20, 'montoya.omar@uabc.edu.mx', '1252892', 0, 0),
+(21, 'raygoza.brandon@uabc.edu.mx', '1244394', 0, 0),
+(22, 'alan.omar.robledo.lopez@uabc.edu.mx', '1239405', 0, 0),
+(23, 'a1252872@uabc.edu.mx', '1252872', 0, 0),
+(24, 'josue.varela@uabc.edu.mx', '1241805', 0, 0),
+(25, 'victor.vera@uabc.edu.mx', '1252893', 0, 0),
+(26, 'a1246836@uabc.edu.mx', '1246836', 0, 0),
+(27, 'isaac.hernandez.cano@uabc.edu.mx', '1244809', 0, 0),
+(28, 'david.moncivais@uabc.edu.mx', '1249134', 0, 0),
+(29, 'imorales13@uabc.edu.mx', '1231098', 0, 0),
+(30, 'quintero.cristina@uabc.edu.mx', '1216718', 0, 0),
+(31, 'liam.tapia@uabc.edu.mx', '1249667', 0, 0),
+(32, 'arturo.viruete@uabc.edu.mx', '1235877', 0, 0),
+(33, 'german.adame@uabc.edu.mx', '1247508', 0, 0),
+(34, 'leonardo.david.aguilar.contreras@uabc.edu.mx', '1235197', 0, 0),
+(35, 'jessica.anguiano@uabc.edu.mx', '1252071', 0, 0),
+(36, 'ricardo.castanon@uabc.edu.mx', '1244393', 0, 0),
+(37, 'diego.caudillo@uabc.edu.mx', '1249199', 0, 0),
+(38, 'CCAZARES8@uabc.edu.mx', '1245120', 0, 0),
+(39, 'alberto.chagala@uabc.edu.mx', '1235788', 0, 0),
+(40, 'chavez.ignacio@uabc.edu.mx', '1246720', 0, 0),
+(41, 'salvador.gonzalez.beltran@uabc.edu.mx', '1242003', 0, 0),
+(42, 'gutierrez.alexis85@uabc.edu.mx', '1229558', 0, 0),
+(43, 'alberto.jaquez@uabc.edu.mx', '1238268', 0, 0),
+(44, 'kim.jungeum@uabc.edu.mx', '1236301', 0, 0),
+(45, 'guillermo.leon.barrios@uabc.edu.mx', '1226489', 0, 0),
+(46, 'oscar.martinez42@uabc.edu.mx', '1232092', 0, 0),
+(47, 'amartinez31@uabc.edu.mx', '1238137', 0, 0),
+(48, 'daniel.najera@uabc.edu.mx', '1242780', 0, 0),
+(49, 'palacio.luis@uabc.edu.mx', '1221858', 0, 0),
+(50, 'rpalafox@uabc.edu.mx', '1224684', 0, 0),
+(51, 'a1230591@uabc.edu.mx', '1230591', 0, 0),
+(52, 'andre.patino@uabc.edu.mx', '1239210', 0, 0),
+(53, 'a1245064@uabc.edu.mx', '1245064', 0, 0),
+(54, 'reyes.rachelle@uabc.edu.mx', '1244220', 0, 0),
+(55, 'yereline.sanchez@uabc.edu.mx', '1226795', 0, 0),
+(56, 'bryan.silva@uabc.edu.mx', '1230477', 0, 0),
+(57, 'mvillela@uabc.edu.mx', '1230053', 0, 0),
+(58, 'alejandra.brughera@uabc.edu.mx', '1220619', 0, 0),
+(59, 'mcortes26@uabc.edu.mx', '1230589', 0, 0),
+(60, 'flores.saul@uabc.edu.mx', '1217102', 0, 0),
+(61, 'carlos.alejandro.gonzalez.ortiz@uabc.edu.mx', '1217280', 0, 0),
+(62, 'a1252819@uabc.edu.mx', '1252819', 0, 0),
+(63, 'lgutierrez7@uabc.edu.mx', '1230078', 0, 0),
+(64, 'yaneli.mendias@uabc.edu.mx', '1234550', 0, 0),
+(65, 'emmanuel.nuno.estrella@uabc.edu.mx', '1208750', 0, 0),
+(66, 'miguel.robledo@uabc.edu.mx', '1208767', 0, 0),
+(67, 'aaron.torres@uabc.edu.mx', '1225272', 0, 0),
+(68, 'alanism@uabc.edu.mx', '1208658', 0, 0),
+(69, 'martin.arevalos@uabc.edu.mx', '1216693', 0, 0),
+(70, 'arreola.arturo@uabc.edu.mx', '1225936', 0, 0),
+(71, 'angelica.avila@uabc.edu.mx', '1200553', 0, 0),
+(72, 'victor.barcenas@uabc.edu.mx', '1220995', 0, 0),
+(73, 'alberto.betancourt@uabc.edu.mx', '1229948', 0, 0),
+(74, 'magdalena.bravo@uabc.edu.mx', '1214623', 0, 0),
+(75, 'lcamacho32@uabc.edu.mx', '1231366', 0, 0),
+(76, 'yair.castrejon@uabc.edu.mx', '1217306', 0, 0),
+(77, 'ricardo.castro27@uabc.edu.mx', '1217169', 0, 0),
+(78, 'uriel.cebreros@uabc.edu.mx', '1217167', 0, 0),
+(79, 'li.chon@uabc.edu.mx', '1208520', 0, 0),
+(80, 'delacruz.carlos@uabc.edu.mx', '1217266', 0, 0),
+(81, 'brallan.dominguez@uabc.edu.mx', '1227952', 0, 0),
+(82, 'luis.encinas@uabc.edu.mx', '1217249', 0, 0),
+(83, 'berenice.flores@uabc.edu.mx', '1217242', 0, 0),
+(84, 'a1226702@uabc.edu.mx', '1226702', 0, 0),
+(85, 'luis.gonzalez15@uabc.edu.mx', '1217258', 0, 0),
+(86, 'oscar.islas@uabc.edu.mx', '1217113', 0, 0),
+(87, 'jimenez.paul@uabc.edu.mx', '1216621', 0, 0),
+(88, 'mariesli.lavenant@uabc.edu.mx', '1229127', 0, 0),
+(89, 'adel.leon@uabc.edu.mx', '1208458', 0, 0),
+(90, 'gustavo.leyva@uabc.edu.mx', '1200429', 0, 0),
+(91, 'dante.lopez@uabc.edu.mx', '1217111', 0, 0),
+(92, 'emmanuel.moran@uabc.edu.mx', '1216638', 0, 0),
+(93, 'nevarez.arturo@uabc.edu.mx', '1216790', 0, 0),
+(94, 'luis.picazarri@uabc.edu.mx', '1216845', 0, 0),
+(95, 'osbaldo.reyes@uabc.edu.mx', '1208610', 0, 0),
+(96, 'rochelle.reyes@uabc.edu.mx', '1227914', 0, 0),
+(97, 'sanchezm78@uabc.edu.mx', '1228338', 0, 0),
+(98, 'victor.aaron.sanchez.quiroz@uabc.edu.mx', '1208908', 0, 0),
+(99, 'efrain.segoviano@uabc.edu.mx', '1234226', 0, 0),
+(100, 'roberto.sevilla.varela@uabc.edu.mx', '1228153', 0, 0),
+(101, 'aldo.silva@uabc.edu.mx', '290179', 0, 0),
+(102, 'tapia.edgar5@uabc.edu.mx', '1227444', 0, 0),
+(103, 'jesus.trinidad@uabc.edu.mx', '1208846', 0, 0),
+(104, 'valdez.gabriel@uabc.edu.mx', '1208408', 0, 0),
+(105, 'salvador.zaragoza@uabc.edu.mx', '1217075', 0, 0),
+(106, 'jose.bolanos@uabc.edu.mx', '1208529', 0, 0),
+(107, 'eneida.espinoza@uabc.edu.mx', '1200315', 0, 0),
+(108, 'erick.gerardo.gonzalez.cardiel@uabc.edu.mx', '1226679', 0, 0),
+(109, 'armando.gutierrez5@uabc.edu.mx', '1200271', 0, 0),
+(110, 'daniel.herrera.gonzalez@uabc.edu.mx', '1207876', 0, 0),
+(111, 'sergio.jimenez@uabc.edu.mx', '1208411', 0, 0),
+(112, 'vlopez44@uabc.edu.mx', '1208369', 0, 0),
+(113, 'denisse.nevarez@uabc.edu.mx', '1232312', 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -336,20 +319,12 @@ INSERT INTO `cuentas_admin` (`Id_Cuenta`, `Usuario`, `Contrasena`) VALUES
 -- Indices de la tabla `alumni`
 --
 ALTER TABLE `alumni`
-  ADD PRIMARY KEY (`Matricula`),
-  ADD UNIQUE KEY `unique_CorreoI` (`CorreoI`);
+  ADD PRIMARY KEY (`Matricula`);
 
 --
 -- Indices de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  ADD PRIMARY KEY (`Id_Cuenta`),
-  ADD KEY `Usuario` (`Usuario`);
-
---
--- Indices de la tabla `cuentas_admin`
---
-ALTER TABLE `cuentas_admin`
   ADD PRIMARY KEY (`Id_Cuenta`);
 
 --
@@ -360,23 +335,7 @@ ALTER TABLE `cuentas_admin`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
-
---
--- AUTO_INCREMENT de la tabla `cuentas_admin`
---
-ALTER TABLE `cuentas_admin`
-  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `cuentas`
---
-ALTER TABLE `cuentas`
-  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `alumni` (`CorreoI`);
+  MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
