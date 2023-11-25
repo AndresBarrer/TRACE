@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.setRequestHeader("Pragma", "no-cache");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Respuesta del servidor:", xhr.responseText);
             data = JSON.parse(xhr.responseText);
             showRowsInPage(data);
         }
