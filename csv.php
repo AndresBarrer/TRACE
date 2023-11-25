@@ -69,13 +69,16 @@ if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
             </nav>
         </div>
 
-        <section id="content-wrapper">
-            <div id="upload-container">
-                <h2>Subir archivo CSV</h2>
-                <form id="upload-form" action="Resources/csv_process.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="csv-file" accept=".csv">
+        <section id="content-wrapper"> 
+            <h2>Subir archivo CSV</h2>   
+            <h4>Para subir un archivo en formato csv es necesario que el mismo cumpla con un formato especifico el cual debe de seguir lo siguiente:</h4> 
+            <h4>algo,algo,algo,algo</h4>
+            <div id="upload-container" class="form-group inputDnD col-sm-6 offset-sm-3">
+                <form id="upload-form" action="Resources/csv.php" method="post" enctype="multipart/form-data">
+                    <input type="file" class="form-control-file text-success font-weight-bold" name="csv-file" accept=".csv"
+                        data-title="Arrastra un archivo aqui o da clic" id="inputFile">
                     <br>
-                    <input type="submit" value="Subir CSV" class="btn btn-primary">
+                    <input type="submit" value="Subir CSV" class="form-control-button">
                 </form>
             </div>
         </section>
