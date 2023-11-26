@@ -6,6 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $empresa = $_POST['empresa'];
     $correoPersonal = $_POST['correoPersonal'];
     $puesto = $_POST['puesto'];
+    $pais = $_POST['pais'];
+    $ciudad = $_POST['ciudad'];
 
     // Realiza la actualización en la tabla alumni
     $host = "localhost";
@@ -22,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Actualiza los valores en la tabla alumni
-    $sql = "UPDATE alumni SET Compania='$empresa', CorreoP='$correoPersonal', Puesto='$puesto' WHERE Matricula='$matricula'";
+    $sql = "UPDATE alumni SET Compania='$empresa', CorreoP='$correoPersonal', Puesto='$puesto', GeoLocationName='$ciudad', GeoCountryName='$pais' WHERE Matricula='$matricula'";
 
     if ($conn->query($sql) === false) {
         echo "Error al actualizar los datos: " . $conn->error;

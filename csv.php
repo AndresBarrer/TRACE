@@ -74,7 +74,7 @@ if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
             <h4>Para subir un archivo en formato csv es necesario que el mismo cumpla con un formato especifico el cual debe de seguir lo siguiente:</h4> 
             <h4>algo,algo,algo,algo</h4>
             <div id="upload-container" class="form-group inputDnD col-sm-6 offset-sm-3">
-                <form id="upload-form" action="Resources/csv.php" method="post" enctype="multipart/form-data">
+                <form id="upload-form" action="Resources/csv_process.php" method="post" enctype="multipart/form-data">
                     <input type="file" class="form-control-file text-success font-weight-bold" name="csv-file" accept=".csv"
                         data-title="Arrastra un archivo aqui o da clic" id="inputFile">
                     <br>
@@ -84,6 +84,18 @@ if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
         </section>
         
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Selecciona el elemento inputFile
+            var inputFile = document.getElementById("inputFile");
+
+            // Agrega un evento change al inputFile
+            inputFile.addEventListener("change", function() {
+                // Actualiza el valor del atributo data-title con el nombre del archivo seleccionado
+                inputFile.setAttribute("data-title", "Archivo seleccionado: " + this.files[0].name);
+            });
+        });
+    </script>
     <script src="Resources/scripts.js"></script>
 </body>
 
