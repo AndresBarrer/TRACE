@@ -8,12 +8,6 @@ def main():
     alumnos_total = 0
     alumnos_encontrados = 0
     alumnos_no_encontrados = 0
-
-    # Create a connection to the database
-    #connection = sqlite3.connect('trace.sql')
-    
-    # Create a cursor to the database to make changes
-    #cursor = connection.cursor()
     
     # Connect to the database 
     db = mysql.connector.connect(

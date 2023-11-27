@@ -1,28 +1,14 @@
 import csv
 import sqlite3
 import time
-import os
 from selenium import webdriver
 from linkedin_api import Linkedin
 from geopy.geocoders import Nominatim
 import folium
 from folium.plugins import HeatMap
 from linkedinAccount import account, password
-
-def insert_student_to_database(cursor, matricula, nombre, apellido_p, apellido_m):
-    """
-    Inserts a student and their details into the database.
-
-    Parameters:
-        cursor (sqlite3.Cursor): Cursor used to navigate the SQL database.
-        matricula (str): Matricula of the student to be inserted.
-        nombre (str): Nombre of the student to be inserted.
-        apellido_p (str): Apellido paterno of the student to be inserted.
-        apellido_m (str): Apellido materno of the student to be inserted.
-    """
-    
-    cursor.execute("INSERT INTO alumni (Matricula, Nombre, ApellidoP, ApellidoM) VALUES (?, ?, ?, ?)",
-                   (matricula, nombre, apellido_p, apellido_m))
+import mysql.connector
+import os
 
 
 # Used for when the student has not yet been added to the database
@@ -47,13 +33,13 @@ def get_student_info_from_database(cursor, matricula):
 
 
 
-def getStudentURL(driver, student_name):
+def getStudentURL(driver, student_name, apellido_paterno):
     """
     Get the URL of a student's LinkedIn profile based on their name.
 
     Parameters:
-        driver (selenium.webdriver.Chrome): The Chrome Web Driver for Selenium.
-        student_name (str): The name of the student to search for.
+        driver          (selenium.webdriver.Chrome): The Chrome Web Driver for Selenium.
+        student_name    (str): The name of the student to search for.
 
     Returns:
         str: The URL of the student's LinkedIn profile or None if not found.
@@ -63,7 +49,8 @@ def getStudentURL(driver, student_name):
     time.sleep(3)
 
     search_box = driver.find_element_by_id("people-search-keywords")
-    search_box.send_keys(student_name)
+    student = student_name + " " + apellido_paterno
+    search_box.send_keys(student)
     search_box.submit()
     time.sleep(3)
 
@@ -74,26 +61,24 @@ def getStudentURL(driver, student_name):
         return driver.current_url
     except NoSuchElementException:
         return None
-
-
-# MIGHT NOT NEED COUNTRY NAME, MODIFY DATABASE?
-def update_student_info_in_database(cursor, matricula, geo_location_name, title, company_name):
+ 
+def update_student_info_in_database(cursor, matricula, geo_location_name, geo_country_name, title, company_name):
     """
     Updates student information in the database with provided parameters.
 
     Parameters:
-        cursor (sqlite3.Cursor): The cursor used to interact with the database.
-        matricula (str): The unique ID of the student.
-        geo_location_name (str): The location of the student.
-        title (str): The job title of the student.
-        company_name (str): The company name where the student works.
+        cursor              (sqlite3.Cursor): The cursor used to interact with the database.
+        matricula           (str): The unique ID of the student.
+        geo_location_name   (str): The location of the student.
+        title               (str): The job title of the student.
+        company_name        (str): The company name where the student works.
 
     Returns:
         None
     """
     
-    cursor.execute("UPDATE alumni SET GeoLocationName=?, Puesto=?, Compania=? WHERE Matricula=?",
-                   (geo_location_name, title, company_name, matricula))
+    cursor.execute("UPDATE alumni SET GeoLocationName=?, GeoCountryName=?, Puesto=?, Compania=? WHERE Matricula=?",
+                   (geo_location_name, geo_country_name,title, company_name, matricula))
 
 
 def fetch_student_locations_from_database(cursor):
@@ -163,28 +148,6 @@ def main():
     
     # Create a cursor to the database
     cursor = db.cursor()
-
-    # Open the csv file with read permissions
-    with open("tablas-egresados.csv", "r") as file:
-        csvreader = csv.reader(file)
-        
-        # Get basic info of each student in csv file
-        for row in csvreader:
-            matricula = row[0]
-            nombre = row[5]
-            apellido_paterno = row[3]
-            apellido_materno = row[4]
-
-            # Attempts to get Nombre, ApellidoP, ApellidoM
-            existing_student = get_student_info_from_database(cursor, matricula)
-
-            # If the student does not exist, insert into database
-            if existing_student[0] is None:
-                insert_student_to_database(cursor, matricula, nombre, apellido_paterno, apellido_materno)
-                print(f"New student added: Matricula {matricula}, Name: {nombre}, Last Name: {apellido_paterno} {apellido_materno}")
-            else:
-                print(f"Student with ID {matricula} already exists in the database.")
-
     db.commit()
 
     cursor.execute("SELECT Matricula, Nombre, ApellidoP FROM alumni")
@@ -195,11 +158,12 @@ def main():
     # Used to update the students info in the database
     for student in students:
         matricula, student_name, apellido_paterno = student
-        current_url = getStudentURL(driver, student_name)
+        current_url = getStudentURL(driver, student_name, apellido_paterno)
 
         api = Linkedin(account, password)
         user = api.get_profile(current_url)
 
+        # Find firstName, lastName, geoLocationName, geoCountryName, in found user data
         if 'firstName' in user:
             first_name = user['firstName']
         else:
@@ -212,7 +176,12 @@ def main():
             geo_location_name = user['geoLocationName']
         else:
             geo_location_name = "N/A"
+        if 'geoCountryName' in user:
+            geo_country_name = user['geoCountryName']
+        else:
+            geo_country_name = "N/A"
 
+        # Set to empty for now, in case it isnt found in 'experience'
         title = "N/A"
         company_name = "N/A"
 
@@ -224,22 +193,15 @@ def main():
         print(f"Student: {first_name} {last_name}")
         print(f"Located in: {geo_location_name}")
         print(f"Occupation: {title} at {company_name}")
-        print(f"Matricula: {matricula}, Apellido Paterno: {apellido_paterno}")
+        print(f"Matricula: {matricula}")
 
         # Insert the additional information into the database
-        update_student_info_in_database(cursor, matricula, geo_location_name, title, company_name)
-        
+        update_student_info_in_database(cursor, matricula, geo_location_name, geo_country_name, title, company_name)
 
-    # Fetch and process student locations from the database
-    locations_lat_lon = fetch_student_locations_from_database(cursor)
-
-    # Generate and save the heatmap with the processed locations
-    generate_heatmap(locations_lat_lon, "heatmap.html")
-
-    # Llamar a pieChart.py para generar el gráfico circular
-    os.system("python pieChart.py")
-
+    cursor.close()
     db.close()
+    os.system("python heatmap.py")
+
 
 
 
