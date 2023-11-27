@@ -8,6 +8,35 @@ document.addEventListener("DOMContentLoaded", function () {
     var searchButton = document.getElementById("search-button");
     var filteredData;
 
+    function exportarTabla() {
+        // Obtener la referencia de la tabla
+        var tabla = document.getElementById("user-table");
+    
+        // Crear un objeto CSV
+        var csv = [];
+        var filas = tabla.getElementsByTagName("tr");
+    
+        for (var i = 0; i < filas.length; i++) {
+            var datosFila = [];
+            var celdas = filas[i].getElementsByTagName("td");
+    
+            for (var j = 0; j < celdas.length; j++) {
+                datosFila.push(celdas[j].innerText);
+            }
+    
+            csv.push(datosFila.join(","));
+        }
+    
+        // Crear un objeto Blob y descargar el archivo CSV
+        var blob = new Blob([csv.join("\n")], { type: "text/csv;charset=utf-8;" });
+        var enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(blob);
+        enlace.setAttribute("download", "datos.csv");
+        document.body.appendChild(enlace);
+        enlace.click();
+        document.body.removeChild(enlace);
+    }
+    
     // Objeto para rastrear el estado de orden de cada columna
     var columnSortStates = {
         "sort-nombre": "asc",
