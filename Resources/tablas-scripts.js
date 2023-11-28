@@ -6,37 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var nextButton = document.getElementById("next-page");
     var searchInput = document.getElementById("search-input");
     var searchButton = document.getElementById("search-button");
-    var filteredData;
+    var exportdata = document.getElementById("export-data");
+    var filteredData; 
 
-    function exportarTabla() {
-        // Obtener la referencia de la tabla
-        var tabla = document.getElementById("user-table");
-    
-        // Crear un objeto CSV
-        var csv = [];
-        var filas = tabla.getElementsByTagName("tr");
-    
-        for (var i = 0; i < filas.length; i++) {
-            var datosFila = [];
-            var celdas = filas[i].getElementsByTagName("td");
-    
-            for (var j = 0; j < celdas.length; j++) {
-                datosFila.push(celdas[j].innerText);
-            }
-    
-            csv.push(datosFila.join(","));
-        }
-    
-        // Crear un objeto Blob y descargar el archivo CSV
-        var blob = new Blob([csv.join("\n")], { type: "text/csv;charset=utf-8;" });
-        var enlace = document.createElement("a");
-        enlace.href = URL.createObjectURL(blob);
-        enlace.setAttribute("download", "datos.csv");
-        document.body.appendChild(enlace);
-        enlace.click();
-        document.body.removeChild(enlace);
-    }
-    
     // Objeto para rastrear el estado de orden de cada columna
     var columnSortStates = {
         "sort-nombre": "asc",
@@ -206,6 +178,38 @@ document.addEventListener("DOMContentLoaded", function () {
         page = 1;
         showRowsInPage(filteredData);
     });
+    
+    exportdata.addEventListener("click", function () {
+        // Use filteredData instead of extracting data from the table
+        var dataToExport = filteredData || data;
+
+        // Crear un objeto CSV
+        var csv = [];
+
+        // Obtener encabezados de la tabla
+        var headers = Object.keys(dataToExport[0]);
+        csv.push(headers.join(","));
+
+        // Obtener datos de las filas
+        for (var i = 0; i < dataToExport.length; i++) {
+            var datosFila = [];
+
+            for (var j = 0; j < headers.length; j++) {
+                datosFila.push(dataToExport[i][headers[j]] || 'N/A');
+            }
+
+            csv.push(datosFila.join(","));
+        }
+        // Crear un objeto Blob y descargar el archivo CSV
+        var blob = new Blob([csv.join("\n")], { type: "text/csv;charset=utf-8;" });
+        var enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(blob);
+        enlace.setAttribute("download", "datos.csv");
+        document.body.appendChild(enlace);
+        enlace.click();
+        document.body.removeChild(enlace);
+    });
+
 
     // Realiza una solicitud AJAX para obtener los datos de la base de datos
     var xhr = new XMLHttpRequest();
@@ -214,12 +218,9 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.setRequestHeader("Pragma", "no-cache");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("Respuesta del servidor:", xhr.responseText);
             data = JSON.parse(xhr.responseText);
             showRowsInPage(data);
         }
     };
     xhr.send();
 });
-
-
