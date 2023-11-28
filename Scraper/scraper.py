@@ -25,7 +25,7 @@ def get_student_info_from_database(cursor, matricula):
         or (None, None, None) if not found in the database.
     """
 
-    cursor.execute("SELECT Nombre, ApellidoP, ApellidoM FROM students WHERE Matricula=?", (matricula,))
+    cursor.execute("SELECT Nombre, ApellidoP, ApellidoM FROM alumni WHERE Matricula=?", (matricula,))
     student_data = cursor.fetchone()
     if student_data:
         return student_data[0], student_data[1], student_data[2]

@@ -22,7 +22,7 @@ def fetch_student_locations_from_database(cursor):
     """
 
     # Fetch only the GeoLocationName from the database
-    cursor.execute("SELECT GeoLocationName FROM students")
+    cursor.execute("SELECT GeoLocationName FROM alumni")
     student_locations = cursor.fetchall()
 
     # Filter out locations with "N/A" and geocode them
@@ -87,7 +87,7 @@ def main():
     db.close()
     
     # Run pieChart.py after heatmap has been created
-    os.system("python pieChart.py")
+    os.system("python /xampp/htdocs/TRACE/Scraper/pieChart.py")
 
 
 
