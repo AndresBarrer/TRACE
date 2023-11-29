@@ -177,12 +177,36 @@ table tr:nth-child(2n+1) {
   }
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .pagination-buttons {
-    text-align: center;
+  text-align: center;
+  flex-grow: 1;
+  /* Hace que esta div ocupe todo el espacio disponible */
 }
 
 .pagination-buttons button {
-    box-sizing:content-box;
-    background-color: beige;    
-    margin-left: 10px; /* Ajusta el espacio entre los botones */
+  box-sizing: content-box;
+  background-color: beige;
+  margin-left: 5px;
+  /* Ajusta el espacio entre los botones */
+}
+
+.export-csv {
+  display: flex;
+  background-color: beige;
+  text-align: center;
+  border-width: 1px;
+  margin-left: auto;
+  margin-right: 60px;
+  /* Ajusta el espacio a la derecha del botón de descarga */
+}
+
+a{
+  color: black;
+  text-decoration: none;
 }
