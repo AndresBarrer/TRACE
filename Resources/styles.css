@@ -476,3 +476,9 @@ h4 {
   margin-top: 25px;
   display: flex;
 }
+
+.alert-success{
+  position: relative;
+  margin-top: 25px;
+  display: flex;
+}

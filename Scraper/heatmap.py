@@ -51,7 +51,7 @@ def generate_heatmap(locations_lat_lon, output_file):
     """
 
     # Create a Folium map
-    map = folium.Map(location=[38.27312, -98.5821872], zoom_start=4)
+    map = folium.Map(location=[38.27312, -98.5821872], zoom_start=4, min_zoom=2)
 
     # Define the maximum bounds for the map (worldwide bounds)
     max_bounds = [[-90, -180], [90, 180]]
@@ -63,7 +63,6 @@ def generate_heatmap(locations_lat_lon, output_file):
 
     # Save the map as an HTML file
     map.save(output_file)
-
 
 def main():
 
@@ -82,7 +81,7 @@ def main():
     locations_lat_lon = fetch_student_locations_from_database(cursor)
 
     # Generate and save the heatmap with the processed locations
-    generate_heatmap(locations_lat_lon, "heatmap.html")
+    generate_heatmap(locations_lat_lon, "Scraper/heatmap.html")
     cursor.close()
     db.close()
     
