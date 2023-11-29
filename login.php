@@ -39,10 +39,10 @@
                     <a href="faq.html"><i class="fa fa-question"></i>FAQ</a>
                 </li>
                 <li class="active">
-                    <a href="login.html"><i class="fa fa-upload"></i>Actualiza tus datos</a>
+                    <a href="login.php"><i class="fa fa-upload"></i>Actualiza tus datos</a>
                 </li>
                 <li>
-                    <a href="admin.html"><i class="fa fa-upload"></i>Admin</a>
+                    <a href="admin.php"><i class="fa fa-upload"></i>Admin</a>
                 </li>
             </ul>
         </aside>
@@ -60,12 +60,15 @@
             <div class="container">
                 <div class="glassmorphism-form">
                   <h2>Inicia Sesion</h2>
-                  <form id="login-form" action="Resources/login.php" method="post">
+                  <form id="login-form" method="post">
                     <input type="text" name="correo" placeholder="Correo" required>
                     <input type="password" name="contrasena" placeholder="Contraseña" required>
-                    <button type="submit">Continuar</button>
+                    <button type="submit" name="login-process">Continuar</button>
+                    <?php	
+                    include("Resources/login.php");
+                    ?>
                   </form>
-                  <a href="reset_contra.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                  <a href="reset_contra.php" class="forgot-password">¿Olvidaste tu contraseña?</a>
                 </div>
               </div>
         </section>

@@ -470,3 +470,9 @@ h4 {
   cursor: pointer;
   font-size: 20px;
 }
+
+.alert-danger{
+  position: relative;
+  margin-top: 25px;
+  display: flex;
+}

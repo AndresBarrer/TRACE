@@ -51,10 +51,10 @@ if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
                     <a href="faq.html"><i class="fa fa-question"></i>FAQ</a>
                 </li>
                 <li>
-                    <a href="login.html"><i class="fa fa-upload"></i>Actualiza tus datos</a>
+                    <a href="login.php"><i class="fa fa-upload"></i>Actualiza tus datos</a>
                 </li>
                 <li class="active">
-                    <a href="admin.html"><i class="fa fa-upload"></i>Admin</a>
+                    <a href="admin.php"><i class="fa fa-upload"></i>Admin</a>
                 </li>
             </ul>
         </aside>
@@ -72,13 +72,16 @@ if (!isset($_SESSION['autenticado']) || !$_SESSION['autenticado']) {
         <section id="content-wrapper"> 
             <h2>Subir archivo CSV</h2>   
             <h4>Para subir un archivo en formato csv es necesario que el mismo cumpla con un formato especifico el cual debe de seguir lo siguiente:</h4> 
-            <h4>algo,algo,algo,algo</h4>
+            <h4>Matricula, Nombre, ApellidoP, ApellidoM, CorreoI, FechaIng, FechaEgreso</h4>
             <div id="upload-container" class="form-group inputDnD col-sm-6 offset-sm-3">
-                <form id="upload-form" action="Resources/csv_process.php" method="post" enctype="multipart/form-data">
+                <form id="upload-form" method="post" enctype="multipart/form-data">
                     <input type="file" class="form-control-file text-success font-weight-bold" name="csv-file" accept=".csv"
                         data-title="Arrastra un archivo aqui o da clic" id="inputFile">
                     <br>
-                    <input type="submit" value="Subir CSV" class="form-control-button">
+                    <input type="submit" value="Subir CSV" class="form-control-button" name="upload-csv">
+                    <?php
+                        include("Resources/csv_process.php");
+                    ?>
                 </form>
             </div>
         </section>
