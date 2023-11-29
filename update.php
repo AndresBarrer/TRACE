@@ -50,10 +50,10 @@ if (empty($matricula)) {
                     <a href="faq.html"><i class="fa fa-question"></i>FAQ</a>
                 </li>
                 <li class="active">
-                    <a href="login.html"><i class="fa fa-upload"></i>Actualiza tus datos</a>
+                    <a href="login.php"><i class="fa fa-upload"></i>Actualiza tus datos</a>
                 </li>
                 <li>
-                    <a href="admin.html"><i class="fa fa-upload"></i>Admin</a>
+                    <a href="admin.php"><i class="fa fa-upload"></i>Admin</a>
                 </li>
             </ul>
         </aside>
@@ -71,7 +71,7 @@ if (empty($matricula)) {
             <div class="container">
                 <div class="glassmorphism-form">
                   <h2>Actualiza tus datos</h2>
-                  <form id="update-form" action="Resources/update_process.php" method="post">
+                  <form id="update-form" method="post">
                     <h1>Alumno: <?php echo isset($_GET['matricula']) ? $_GET['matricula'] : 'No disponible'; ?></h1>
                     <h3>Empresa</h3>
                     <input type="hidden" name="matricula" value="<?php echo isset($_GET['matricula']) ? $_GET['matricula'] : ''; ?>">
@@ -329,8 +329,11 @@ if (empty($matricula)) {
                     </select>
                     <h3>Ciudad</h3>
                     <input type="text" name="ciudad" placeholder="Ciudad" required>
-                    <button type="submit">Continuar</button>
+                    <button type="submit" name="update-alumni">Continuar</button>
                   </form>
+                  <?php
+                    include("Resources/update_process.php");
+                  ?>
                 </div>
               </div>
         </section>

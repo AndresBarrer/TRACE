@@ -50,10 +50,10 @@ if (empty($matricula)) {
                     <a href="faq.html"><i class="fa fa-question"></i>FAQ</a>
                 </li>
                 <li class="active">
-                    <a href="login.html"><i class="fa fa-upload"></i>Actualiza tus datos</a>
+                    <a href="login.php"><i class="fa fa-upload"></i>Actualiza tus datos</a>
                 </li>
                 <li>
-                    <a href="admin.html"><i class="fa fa-upload"></i>Admin</a>
+                    <a href="admin.php"><i class="fa fa-upload"></i>Admin</a>
                 </li>
             </ul>
         </aside>
@@ -71,7 +71,7 @@ if (empty($matricula)) {
             <div class="container">
                 <div class="glassmorphism-form">
                   <h2>Cambiar Contraseña</h2>
-                  <form id="update-form" action="Resources/contra_process.php" method="post">
+                  <form id="update-form" method="post">
                     <h1>Alumno: <?php echo isset($_GET['matricula']) ? $_GET['matricula'] : 'No disponible'; ?></h1>
                     <h3>Nueva Constraseña</h3>
                     <input type="hidden" name="matricula" value="<?php echo isset($_GET['matricula']) ? $_GET['matricula'] : ''; ?>">
@@ -79,7 +79,10 @@ if (empty($matricula)) {
                     <input type="password" name="password" placeholder="Nueva Contraseña" required>
                     <h3>Confirmar Contraseña</h3>
                     <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
-                    <button type="submit">Continuar</button>
+                    <button type="submit" name="cambiar-contra">Continuar</button>
+                    <?php
+                        include("Resources/contra_process.php");
+                    ?>
                   </form>
                 </div>
               </div>
