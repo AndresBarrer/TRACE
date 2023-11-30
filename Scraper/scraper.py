@@ -130,13 +130,42 @@ def main():
 
     driver = webdriver.Chrome()
 
+    # Tries that will be attempted if a challenge is received
+    max_retries = 3
+
+    # Time in between retries
+    retry_interval = 60
+
     # Used to update the students info in the database
     for student in students:
         matricula, student_name, apellido_paterno = student
         current_url = getStudentURL(driver, student_name, apellido_paterno)
 
-        api = Linkedin(account, password)
-        user = api.get_profile(current_url)
+        for _ in range(max_retries):
+            try:
+                api = Linkedin(account, password)
+            except NoSuchElementException as e:
+                if "CHALLENGE" in str(e):
+                    print("Received CHALLENGE from LinkedIn, retrying in {} seconds.".format(retry_interval))
+                    time.sleep(retry_interval)
+                else:
+                    print("Error: {}". format(e))
+                    return None
+                
+        for _ in range(max_retries):
+            try:
+                user = api.get_profile(current_url)
+            except NoSuchElementException as e:
+                if "CHALLENGE" in str(e):
+                    print("Received CHALLENGE from LinkedIn, retrying in {} seconds.".format(retry_interval))
+                    time.sleep(retry_interval)
+                else:
+                    print("Error: {}". format(e))
+                    
+        
+                  
+        
+        
 
         # Find firstName, lastName, geoLocationName, geoCountryName, in found user data
         if 'firstName' in user:
