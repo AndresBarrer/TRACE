@@ -110,31 +110,6 @@ def fetch_student_locations_from_database(cursor):
 
     return locations_lat_lon
 
-def generate_heatmap(locations_lat_lon, output_file):
-    """
-    Generates a heatmap and saves it as an HTML file.
-
-    Parameters:
-        locations_lat_lon (list): List of latitude and longitude coordinates for locations.
-        output_file (str): Name of the HTML file to save the heatmap.
-
-    This function creates a Folium map, adds a heatmap layer using the provided coordinates, and saves the map as an HTML file with the given name.
-    """
-
-    # Create a Folium map
-    map = folium.Map(location=[38.27312, -98.5821872], zoom_start=4)
-
-    # Define the maximum bounds for the map (worldwide bounds)
-    max_bounds = [[-90, -180], [90, 180]]
-    map.add_child(folium.LatLngPopup())
-    map.fit_bounds(max_bounds)
-    
-    # Add a heatmap to the map
-    HeatMap(locations_lat_lon).add_to(map)
-
-    # Save the map as an HTML file
-    map.save(output_file)
-
 
 def main():
 

@@ -64,6 +64,7 @@ def generate_heatmap(locations_lat_lon, output_file):
     # Save the map as an HTML file
     map.save(output_file)
 
+
 def main():
 
     # Connect to the database 
