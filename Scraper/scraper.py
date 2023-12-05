@@ -175,7 +175,7 @@ def main():
 
     cursor.close()
     db.close()
-    os.system("python heatmap.py")
+    os.system("python Scraper/heatmap.py")
 
 
 
