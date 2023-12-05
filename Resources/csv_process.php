@@ -68,8 +68,10 @@ if(isset($_POST["upload-csv"])){
 
             // Redirige o muestra un mensaje de éxito
             echo '<div class = "alert alert-success">Archivo subido correctamente</div>';
+            exit();
         } else {
             echo '<div class = "alert alert-danger">Error al subir el archivo</div>';
+            exit();
         }
     }
 }
