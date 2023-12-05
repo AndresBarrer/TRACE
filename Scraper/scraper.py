@@ -10,6 +10,14 @@ from linkedinAccount import account, password
 import mysql.connector
 import os
 
+# Used to look up students through search box
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+import shutil
+import re
 
 # Used for when the student has not yet been added to the database
 def get_student_info_from_database(cursor, matricula):
@@ -46,21 +54,20 @@ def getStudentURL(driver, student_name, apellido_paterno):
     """
 
     driver.get("https://www.linkedin.com/school/universidad-aut%C3%B3noma-de-baja-california/people/")
-    time.sleep(3)
+    time.sleep(2)
 
-    search_box = driver.find_element_by_id("people-search-keywords")
+    search_box = driver.find_element(By.ID, "people-search-keywords")
     student = student_name + " " + apellido_paterno
     search_box.send_keys(student)
-    search_box.submit()
-    time.sleep(3)
+    search_box.send_keys(Keys.RETURN)
 
-    try:
-        result = driver.find_element_by_id("ember829")
-        result.click()
-        time.sleep(3)
-        return driver.current_url
-    except NoSuchElementException:
-        return None
+    time.sleep(2)
+
+    result = driver.find_element(By.CSS_SELECTOR, '.org-people-profile-card__profile-info')
+    result.click()
+
+    time.sleep(2)
+    return driver.current_url
  
 def update_student_info_in_database(cursor, matricula, geo_location_name, geo_country_name, title, company_name):
     """
@@ -111,6 +118,7 @@ def fetch_student_locations_from_database(cursor):
     return locations_lat_lon
 
 
+'''
 def main():
 
     # Connect to the database 
@@ -125,18 +133,37 @@ def main():
     cursor = db.cursor()
     db.commit()
 
-    cursor.execute("SELECT Matricula, Nombre, ApellidoP FROM alumni")
-    students = cursor.fetchall()
+    cursor.execute("SELECT Matricula, Nombre, ApellidoP FROM alumni")   # SQL Query
+    students = cursor.fetchall()                                        # Get all students that match query
 
-    driver = webdriver.Chrome()
+    # Create Chrome web driver
+    executable_path = shutil.which('chromedriver')  # Find the chrome driver
+    driver = webdriver.Chrome(executable_path)      # Assign driver to variable 
+
+    # Navigate to login to linkedin
+    driver.get("https://www.linkedin.com/uas/login")
+    time.sleep(3)
+
+    # Log in to LinkedIn with Chrome web driver
+    email_input = driver.find_element(By.ID, "username")        # Enter username
+    email_input.send_keys(account)                              # Send username
+    password_input = driver.find_element(By.ID, "password")     # Enter password
+    password_input.send_keys(password)                          # Send password
+    password_input.send_keys(Keys.RETURN)
 
     # Used to update the students info in the database
     for student in students:
         matricula, student_name, apellido_paterno = student
         current_url = getStudentURL(driver, student_name, apellido_paterno)
+        print("Current URL: "+ current_url)
 
-        api = Linkedin(account, password)
-        user = api.get_profile(current_url)
+        # REGEX used to extract relevant information
+        profile = re.search(r'/in/([^/]+)/', current_url)   
+        profile = profile.group(1)                          
+        print("Profile: " + profile)
+
+        api = Linkedin(account, password)   # Log in to other api scraper
+        user = api.get_profile(profile)     # Find user with profile
 
         # Find firstName, lastName, geoLocationName, geoCountryName, in found user data
         if 'firstName' in user:
@@ -172,12 +199,76 @@ def main():
 
         # Insert the additional information into the database
         update_student_info_in_database(cursor, matricula, geo_location_name, geo_country_name, title, company_name)
-
+        
     cursor.close()
     db.close()
+    
     os.system("python heatmap.py")
+'''
+
+# Test 
+
+def main():
+    # Create Chrome web driver
+    executable_path = shutil.which('chromedriver')
+
+    # Find the chrome driver and assign it to a variable
+    driver = webdriver.Chrome(executable_path)
+
+    # Navigate to login to linkedin
+    driver.get("https://www.linkedin.com/uas/login")
+    time.sleep(3)
+
+    # Log in to LinkedIn with Chrome web driver
+    email_input = driver.find_element(By.ID, "username")        # Enter username
+    email_input.send_keys(account)                              # Send username
+    password_input = driver.find_element(By.ID, "password")     # Enter password
+    password_input.send_keys(password)                          # Send password
+    password_input.send_keys(Keys.RETURN)                       # Press ENTER
 
 
+    student_name = "Andres"
+    apellido_paterno = "Barrera"
+
+    current_url = getStudentURL(driver, student_name, apellido_paterno)
+    print("Current URL: "+ current_url)
+    
+    profile = re.search(r'/in/([^/]+)/', current_url)
+    profile = profile.group(1)
+
+    api = Linkedin(account, password)
+    user = api.get_profile(profile)
+
+    # Find firstName, lastName, geoLocationName, geoCountryName, in found user data
+    if 'firstName' in user:
+        first_name = user['firstName']
+    else:
+        first_name = "N/A"
+    if 'lastName' in user:
+        last_name = user['lastName']
+    else:
+        last_name = "N/A"
+    if 'geoLocationName' in user:
+        geo_location_name = user['geoLocationName']
+    else:
+        geo_location_name = "N/A"
+    if 'geoCountryName' in user:
+        geo_country_name = user['geoCountryName']
+    else:
+        geo_country_name = "N/A"
+
+    # Set to empty for now, in case it isnt found in 'experience'
+    title = "N/A"
+    company_name = "N/A"
+
+    if 'experience' in user:
+        first_experience = user['experience'][0]  # Assumes at least one entry exists
+        company_name = first_experience.get('companyName')
+        title = first_experience.get('title')
+
+    print(f"Student: {first_name} {last_name}")
+    print(f"Located in: {geo_location_name}")
+    print(f"Occupation: {title} at {company_name}")
 
 
 if __name__ == "__main__":
