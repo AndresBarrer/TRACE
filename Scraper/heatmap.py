@@ -66,7 +66,6 @@ def generate_heatmap(locations_lat_lon, output_file):
 
 
 def main():
-
     # Connect to the database 
     db = mysql.connector.connect(
         host = "localhost",
@@ -87,7 +86,7 @@ def main():
     db.close()
     
     # Run pieChart.py after heatmap has been created
-    os.system("python /xampp/htdocs/TRACE/Scraper/pieChart.py")
+    os.system("python Scraper/pieChart.py")
 
 
 
