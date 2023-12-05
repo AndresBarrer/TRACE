@@ -10,7 +10,7 @@ password = "passwordForAccount"
 ```
   
 
----
+
 **Creating/Activating virtual environment:** 
 ---
 In the terminal: 
@@ -21,7 +21,7 @@ To create a virtual environment:
 Activating virtual environment on Windows:  
 `.\virtual_environment_name\Scripts\activate`
 
-If after running, you get an error of UnauthorizedAccess, run this command, then try activating again:
+If after running, you get an error of UnauthorizedAccess, run this command, then try activating again:  
 `Set-ExecutionPolicy Unrestricted -Scope Process`
 
 
@@ -31,15 +31,23 @@ Activating virtual environment on Linux:
 To create your own requirements.txt:  
 `python -m pip freeze > requirements.txt`
 
----
+
 **Install dependencies:**
 --- 
 **AFTER CREATING AND ACTIVATING VIRTUAL ENVIRONMENT**  
 To install dependencies from requirements.txt in terminal:  
 
 
+
 `python -m pip install -r requirements.txt`
 
+
+**Error retrieving data from linkedin-api:** 
 ---
+Sometimes when running the linkedin-api library, a CHALLENGE will be returned from LinkedIn.  This could be due to:
+- Rate-limiting
+- Temporary-permanent IP blocking
 
-
+There are try-catches implemented in order to attempt to retrieve information again. If that doesn't work, attempt:
+- Connect to a different network 
+- Try at a later time 
