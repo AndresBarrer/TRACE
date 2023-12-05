@@ -20,6 +20,7 @@ import shutil
 import re
 
 # Used for when the student has not yet been added to the database
+# Not in use but leaving if needed for the future
 def get_student_info_from_database(cursor, matricula):
     """
     Get the student's name and last name from the database using their matricula.
@@ -69,6 +70,7 @@ def getStudentURL(driver, student_name, apellido_paterno):
     time.sleep(2)
     return driver.current_url
  
+
 def update_student_info_in_database(cursor, matricula, geo_location_name, geo_country_name, title, company_name):
     """
     Updates student information in the database with provided parameters.
@@ -86,37 +88,6 @@ def update_student_info_in_database(cursor, matricula, geo_location_name, geo_co
     
     cursor.execute("UPDATE alumni SET GeoLocationName=?, GeoCountryName=?, Puesto=?, Compania=? WHERE Matricula=?",
                    (geo_location_name, geo_country_name,title, company_name, matricula))
-
-
-def fetch_student_locations_from_database(cursor):
-    """
-    Fetches student locations from the database, geocodes them, and returns a list of coordinates.
-
-    Parameters:
-        cursor (sqlite3.Cursor): The cursor used to interact with the database.
-
-    Returns:
-        list: A list of latitude and longitude coordinates for valid student locations.
-    """
-
-    # Fetch only the GeoLocationName from the database
-    cursor.execute("SELECT GeoLocationName FROM students")
-    student_locations = cursor.fetchall()
-
-    # Filter out locations with "N/A" and geocode them
-    locations_lat_lon = []
-
-    geolocator = Nominatim(user_agent="TRACE")
-
-    for geo_location_name, in student_locations:
-        if geo_location_name != "N/A":
-            location = geolocator.geocode(query=geo_location_name)
-            if location:
-                location_lat_lon = [location.latitude, location.longitude]
-                locations_lat_lon.append(location_lat_lon)
-
-    return locations_lat_lon
-
 
 '''
 def main():
